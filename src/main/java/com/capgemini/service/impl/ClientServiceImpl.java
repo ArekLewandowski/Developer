@@ -27,7 +27,7 @@ public class ClientServiceImpl implements ClientService {
 
 	@Override
 	public ClientTO getClient(Long id) {
-		ClientEntity clientEntity = clientDAO.getOne(id);
+		ClientEntity clientEntity = clientDAO.findOne(id);
 		return ClientMapper.map2TO(clientEntity);
 	}
 

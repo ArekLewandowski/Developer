@@ -1,14 +1,16 @@
 package com.capgemini.domain;
 
-import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -18,21 +20,20 @@ import com.capgemini.enums.FLAT_STATUS;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "FLAT")
-public class FlatEntity  implements Serializable{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6738130609171027027L;
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@EntityListeners({OnCreateListener.class, OnUpdateListener.class})
+public class FlatEntity extends AbstractEntity{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -53,10 +54,10 @@ public class FlatEntity  implements Serializable{
 	private int price;
 	
 	@ManyToOne
-	private List<BuildingEntity> buildingEntities = new LinkedList<>();
+	private BuildingEntity buildingEntity;
 	
 	@ManyToOne
-	private List<ClientEntity> owner = new LinkedList<>();
+	private ClientEntity owner;
 
 	@ManyToMany
 	private List<ClientEntity> coowner = new LinkedList<>();

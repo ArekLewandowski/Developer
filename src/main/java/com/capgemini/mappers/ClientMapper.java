@@ -10,14 +10,14 @@ public class ClientMapper {
 
 	public static ClientTO map2TO(ClientEntity clientEntity) {
 		return ClientTO.builder().id(clientEntity.getId()).firstName(clientEntity.getFirstName())
-				.lastName(clientEntity.getLastName()).dateOfBirth(clientEntity.getDateOfBirth())
+				.lastName(clientEntity.getLastName())
 				.addres(clientEntity.getAddres()).phone(clientEntity.getPhone()).email(clientEntity.getEmail())
 				.build();
 	}
 
 	public static ClientEntity map2Entity(ClientTO clientTO) {
 		return ClientEntity.builder().id(clientTO.getId()).firstName(clientTO.getFirstName())
-				.lastName(clientTO.getLastName()).dateOfBirth(clientTO.getDateOfBirth()).addres(clientTO.getAddres())
+				.lastName(clientTO.getLastName()).addres(clientTO.getAddres())
 				.phone(clientTO.getPhone()).email(clientTO.getEmail()).build();
 	}
 
