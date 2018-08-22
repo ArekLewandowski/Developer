@@ -43,7 +43,7 @@ public class ClientEntity extends AbstractEntity{
 	@Column
 	private String email;
 	@Column
-	private String addres;
+	private String address;
 	@Column
 	private String phone;
 	@OneToMany(mappedBy = "owner")
@@ -53,5 +53,11 @@ public class ClientEntity extends AbstractEntity{
 	@Version
 	private Long version;
 
+	public void addOwned(FlatEntity flatEntity){
+		this.owned.add(flatEntity);
+	}
 	
+	public void addCoowned(FlatEntity flatEntity){
+		this.coowned.add(flatEntity);
+	}
 }

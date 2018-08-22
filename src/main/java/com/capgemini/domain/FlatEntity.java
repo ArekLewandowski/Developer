@@ -64,4 +64,8 @@ public class FlatEntity extends AbstractEntity{
 	
 	@Version
 	private Long version;
+	
+	public void addCoowner(ClientEntity cEntity){
+		this.coowner.add(cEntity);
+	}
 }

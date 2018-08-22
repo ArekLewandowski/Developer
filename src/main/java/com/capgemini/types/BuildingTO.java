@@ -1,5 +1,7 @@
 package com.capgemini.types;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,5 +18,11 @@ public class BuildingTO {
 	private String localization;
 	private int floors;
 	private boolean elevator;
-	private int flatsSum;	
+	private int flatsSum;
+	private List<Long> flatsId;
+	private Long version;
+	
+	public void addFlatId(Long id){
+		this.flatsId.add(id);
+	}
 }

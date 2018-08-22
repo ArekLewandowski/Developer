@@ -1,5 +1,7 @@
 package com.capgemini.types;
 
+import java.util.List;
+
 import com.capgemini.enums.FLAT_STATUS;
 
 import lombok.AllArgsConstructor;
@@ -21,4 +23,12 @@ public class FlatTO {
 	private String address;
 	private FLAT_STATUS status;
 	private int price;
+	private Long buildingId;
+	private Long ownedClientId;
+	private List<Long> coownedClientId;
+	private Long version;
+	
+	public void addCoownedClientId(Long id){
+		this.coownedClientId.add(id);
+	}
 }

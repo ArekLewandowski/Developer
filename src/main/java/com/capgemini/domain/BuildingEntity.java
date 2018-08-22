@@ -51,4 +51,8 @@ public class BuildingEntity extends AbstractEntity{
 	private List<FlatEntity> flats = new LinkedList<>();
 	@Version
 	private Long version;
+	
+	public void addFlat(FlatEntity fEntity){
+		this.flats.add(fEntity);
+	}
 }
