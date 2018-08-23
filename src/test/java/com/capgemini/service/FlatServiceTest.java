@@ -263,15 +263,16 @@ public class FlatServiceTest {
 		flatTO = flatService.addFlat(flatTO);
 		flatTO2 = flatService.addFlat(flatTO2);
 		flatTO3 = flatService.addFlat(flatTO3);
+		flatTO4 = flatService.addFlat(flatTO4);
 		
 		//when
 		flatService.addFlatToBuilding(flatTO.getId(), buildingTO.getId());
 		flatService.addFlatToBuilding(flatTO2.getId(), buildingTO2.getId());
 		flatService.addFlatToBuilding(flatTO3.getId(), buildingTO.getId());
+		flatService.addFlatToBuilding(flatTO4.getId(), buildingTO.getId());
 		List<FlatTO> addedflatTO = flatService.getFlatByRoomsFromTO(2, 3);
 		List<FlatTO> addedflatTO2 = flatService.getFlatBySizeFromTO(40, 50);
-		
-		
+			
 		//then
 		System.out.println("Test3: Dodane mieszkania. Oczekiwwane: "+ addedflatTO.size());
 		System.out.println(addedflatTO.toString());
@@ -283,6 +284,98 @@ public class FlatServiceTest {
 		for (FlatTO flatTO5 : addedflatTO2) {
 			Assert.assertTrue(flatTO5.getSize() > 40 || flatTO5.getSize() < 50);
 		}
+	}
+
+	@Test
+	public void testShouldGetAndIncrementFlatsSum(){
+//		
+		List<FlatTO> preaddedflatTO = flatService.getFlatByRoomsFromTO(2, 3);
+		List<FlatTO> preAddedflatTO2 = flatService.getFlatBySizeFromTO(40, 60);
+		
+		//given
+		FlatTO flatTO = new FlatTO();
+		flatTO.setAddress("A2");
+		flatTO.setBalcoons(2);
+		flatTO.setFloor(1);
+		flatTO.setRooms(3);
+		flatTO.setSize(59);
+		flatTO.setStatus(FLAT_STATUS.FREE);
+		flatTO.setPrice(26000);
+		
+		FlatTO flatTO2 = new FlatTO();
+		flatTO2.setAddress("A4");
+		flatTO2.setBalcoons(2);
+		flatTO2.setFloor(2);
+		flatTO2.setRooms(1);
+		flatTO2.setSize(22);
+		flatTO2.setStatus(FLAT_STATUS.FREE);
+		flatTO2.setPrice(115000);
+		flatTO2 = flatService.addFlat(flatTO2);
+		
+		FlatTO flatTO3 = new FlatTO();
+		flatTO3.setAddress("A5");
+		flatTO3.setBalcoons(0);
+		flatTO3.setFloor(2);
+		flatTO3.setRooms(4);
+		flatTO3.setSize(55);
+		flatTO3.setStatus(FLAT_STATUS.FREE);
+		flatTO3.setPrice(305000);
+		flatTO3 = flatService.addFlat(flatTO3);
+		
+		FlatTO flatTO4 = new FlatTO();
+		flatTO4.setAddress("A6");
+		flatTO4.setBalcoons(3);
+		flatTO4.setFloor(4);
+		flatTO4.setRooms(2);
+		flatTO4.setSize(45);
+		flatTO4.setStatus(FLAT_STATUS.FREE);
+		flatTO4.setPrice(215000);
+		flatTO4 = flatService.addFlat(flatTO4);
+		
+		BuildingTO buildingTO = new BuildingTO();
+		buildingTO.setDescription("New Apartments");
+		buildingTO.setElevator(true);
+		buildingTO.setFlatsSum(0);
+		buildingTO.setFloors(3);
+		buildingTO.setLocalization("Poznań");
+		buildingTO = buildingService.addBuilding(buildingTO);
+		
+		BuildingTO buildingTO2 = new BuildingTO();
+		buildingTO2.setDescription("New Apartments");
+		buildingTO2.setElevator(true);
+		buildingTO2.setFlatsSum(0);
+		buildingTO2.setFloors(3);
+		buildingTO2.setLocalization("Poznań");
+		buildingTO2 = buildingService.addBuilding(buildingTO2);
+		
+		flatTO = flatService.addFlat(flatTO);
+		flatTO2 = flatService.addFlat(flatTO2);
+		flatTO3 = flatService.addFlat(flatTO3);
+		flatTO4 = flatService.addFlat(flatTO4);
+		
+		//when
+		int flatsIn1Building = 0;
+		int flatsIn2Building = 0;
+		flatService.addFlatToBuilding(flatTO.getId(), buildingTO.getId());
+		flatsIn1Building++;
+		flatService.addFlatToBuilding(flatTO2.getId(), buildingTO2.getId());
+		flatsIn2Building++;
+		flatService.addFlatToBuilding(flatTO3.getId(), buildingTO.getId());
+		flatsIn1Building++;
+		flatService.addFlatToBuilding(flatTO4.getId(), buildingTO.getId());
+		flatsIn1Building++;
+		int flats = buildingService.getBuildingById(buildingTO.getId()).getFlatsSum();
+		int flats2 = buildingService.getBuildingById(buildingTO2.getId()).getFlatsSum();
+		
+		
+		//then
+
+		System.out.println("Suma mieszkań Budynek 1:" +flats);
+		System.out.println("Suma mieszkań Budynek 2:" +flats2);
+
+
+		Assert.assertEquals(flatsIn1Building, flats);
+		Assert.assertEquals(flatsIn2Building, flats2);
 	}
 
 }
