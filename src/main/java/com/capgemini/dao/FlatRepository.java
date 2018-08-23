@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.capgemini.domain.BuildingEntity;
 import com.capgemini.domain.FlatEntity;
+import com.capgemini.enums.FLAT_STATUS;
 
 @Repository
 public interface FlatRepository extends JpaRepository<FlatEntity, Long> {
@@ -23,4 +24,17 @@ public interface FlatRepository extends JpaRepository<FlatEntity, Long> {
 	FlatEntity getOne(Long id);
 	
 	List<FlatEntity> findAll();
+	
+	List<FlatEntity> findByBuilding(BuildingEntity building);
+
+	List<FlatEntity> findByStatus(FLAT_STATUS status);
+
+	List<FlatEntity> findByFloor(int floor);
+
+	List<FlatEntity> findBySizeBetween(int min, int max);
+	
+	List<FlatEntity> findByRoomsBetween(int min, int max);
+	
+	List<FlatEntity> findByBalcoonsBetween(int min, int max);
+	
 }

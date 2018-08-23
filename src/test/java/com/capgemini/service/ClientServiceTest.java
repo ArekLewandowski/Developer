@@ -11,7 +11,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.capgemini.types.ClientTO;
 
-@Transactional
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ClientServiceTest {
@@ -21,7 +20,7 @@ public class ClientServiceTest {
 	
 	@Test
 	public void testShouldAddClientAndGet(){
-		
+	
 		//given
 		ClientTO clientTO = ClientTO.builder().firstName("Jan")
 				.lastName("Tomaszewski")

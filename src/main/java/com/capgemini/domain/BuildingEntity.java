@@ -47,7 +47,7 @@ public class BuildingEntity extends AbstractEntity{
 	private boolean elevator;
 	@Column
 	private int flatsSum;	
-	@OneToMany(mappedBy = "buildingEntity")
+	@OneToMany(mappedBy = "building")
 	private List<FlatEntity> flats = new LinkedList<>();
 	@Version
 	private Long version;

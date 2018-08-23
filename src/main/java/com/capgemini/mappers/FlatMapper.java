@@ -1,5 +1,6 @@
 package com.capgemini.mappers;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import com.capgemini.domain.ClientEntity;
@@ -18,26 +19,29 @@ public class FlatMapper {
 		.status(flatEntity.getStatus())
 		.floor(flatEntity.getFloor())
 		.size(flatEntity.getSize())
+		.version(flatEntity.getVersion())
 		.build();
-		flatTO.setOwnedClientId(flatEntity.getOwner().getId());
+		if (flatEntity.getOwner() != null) {
+			flatTO.setOwnedClientId(flatEntity.getOwner().getId());			
+		}
 		List<ClientEntity> coowners = flatEntity.getCoowner();
-		for (ClientEntity clientEntity : coowners) {
-			flatTO.addCoownedClientId(clientEntity.getId());
+		if (!coowners.isEmpty()) {
+			for (ClientEntity clientEntity : coowners) {
+				flatTO.addCoownedClientId(clientEntity.getId());			
+			}
 		}
 		return flatTO;
 	}
 	
-	@SuppressWarnings("static-access")
 	public static FlatEntity map2Entity(FlatTO flatTO, FlatEntity flatEntity) {
-		flatEntity.builder()
-		.address(flatTO.getAddress())
-		.balcoons(flatTO.getBalcoons())
-		.price(flatTO.getPrice())
-		.rooms(flatTO.getRooms())
-		.status(flatTO.getStatus())
-		.floor(flatTO.getFloor())
-		.size(flatTO.getSize())
-		.build();
+		flatEntity.setAddress(flatTO.getAddress());
+		flatEntity.setBalcoons(flatTO.getBalcoons());
+		flatEntity.setPrice(flatTO.getPrice());
+		flatEntity.setRooms(flatTO.getRooms());
+		flatEntity.setStatus(flatTO.getStatus());
+		flatEntity.setFloor(flatTO.getFloor());
+		flatEntity.setSize(flatTO.getSize());
+		flatEntity.setVersion(flatTO.getVersion());
 		return flatEntity;
 	}
 	
@@ -52,5 +56,21 @@ public class FlatMapper {
 	public static FlatEntity map2Entity(FlatTO flatTO) {
 		FlatEntity flatEntity = new FlatEntity();
 		return map2Entity(flatTO, flatEntity);
+	}
+	
+	public static List<FlatTO> map2TOs(List<FlatEntity> flatEntities) {
+		List<FlatTO> flatTOs = new LinkedList<>();
+		for (FlatEntity flatEntity : flatEntities) {
+			flatTOs.add(map2TO(flatEntity));
+		}
+		return flatTOs;
+	}
+	
+	public static List<FlatEntity> map2Entities(List<FlatTO> flatTOs) {
+		List<FlatEntity> flatEntities = new LinkedList<>();
+		for (FlatTO flatTO : flatTOs) {
+			flatEntities.add(map2Entity(flatTO));
+		}
+		return flatEntities;
 	}
 }

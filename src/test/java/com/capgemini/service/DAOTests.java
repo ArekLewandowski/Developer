@@ -1,5 +1,7 @@
 package com.capgemini.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.junit.Assert;
@@ -17,7 +19,7 @@ import com.capgemini.domain.BuildingEntity;
 public class DAOTests {
 
 	@Autowired
-	private BuildingRepository buildingDAO;
+	private BuildingRepository buildingRepository;
 	
 	@Test
 	public void testShouldAddBuilding() {
@@ -29,7 +31,7 @@ public class DAOTests {
 		bEntity.setFlatsSum(10);
 		bEntity.setFloors(3);
 		bEntity.setLocalization("ul.Rolna 1");
-		BuildingEntity addedBuilding = buildingDAO.save(bEntity);
+		BuildingEntity addedBuilding = buildingRepository.save(bEntity);
 	
 		//when
 		int exceptedfloors = 3;
@@ -48,7 +50,7 @@ public class DAOTests {
 		bEntity.setFlatsSum(10);
 		bEntity.setFloors(3);
 		bEntity.setLocalization("ul.Rolna 1");
-		BuildingEntity addedBuilding = buildingDAO.save(bEntity);
+		BuildingEntity addedBuilding = buildingRepository.save(bEntity);
 		
 		BuildingEntity bEntity2 = new BuildingEntity();
 		bEntity.setDescription("Poznań. Debiec");
@@ -56,11 +58,11 @@ public class DAOTests {
 		bEntity.setFlatsSum(15);
 		bEntity.setFloors(4);
 		bEntity.setLocalization("ul.Jasna 5");
-		BuildingEntity addedBuilding2 = buildingDAO.save(bEntity2);
+		BuildingEntity addedBuilding2 = buildingRepository.save(bEntity2);
 	
 		//when
 		int exceptedfloors = addedBuilding.getFloors();
-		BuildingEntity gettedBuilding = buildingDAO.getOne(addedBuilding.getId());
+		BuildingEntity gettedBuilding = buildingRepository.getOne(addedBuilding.getId());
 		//then
 		Assert.assertEquals(exceptedfloors, gettedBuilding.getFloors());
 	}
@@ -75,12 +77,12 @@ public class DAOTests {
 		bEntity.setFlatsSum(10);
 		bEntity.setFloors(3);
 		bEntity.setLocalization("ul.Rolna 1");
-		BuildingEntity addedBuilding = buildingDAO.save(bEntity);
+		BuildingEntity addedBuilding = buildingRepository.save(bEntity);
 	
 		//when
 		int exceptedfloors = addedBuilding.getFloors();
-		BuildingEntity gettedBuilding = buildingDAO.findByLocalization("ul.Rolna 1");
+		List<BuildingEntity> gettedBuildings = buildingRepository.findByLocalization("ul.Rolna 1");
 		//then
-		Assert.assertEquals(exceptedfloors, gettedBuilding.getFloors());
+		Assert.assertEquals(exceptedfloors, gettedBuildings.get(0).getFloors());
 	}
 }

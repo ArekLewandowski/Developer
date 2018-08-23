@@ -54,7 +54,7 @@ public class FlatEntity extends AbstractEntity{
 	private int price;
 	
 	@ManyToOne
-	private BuildingEntity buildingEntity;
+	private BuildingEntity building;
 	
 	@ManyToOne
 	private ClientEntity owner;

@@ -1,5 +1,6 @@
 package com.capgemini.mappers;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import com.capgemini.domain.BuildingEntity;
@@ -16,32 +17,31 @@ public class BuildingMapper {
 				.localization(buildingEntity.getLocalization())
 				.flatsSum(buildingEntity.getFlatsSum())
 				.floors(buildingEntity.getFloors())
+				.version(buildingEntity.getVersion())
+				.flatsId(new LinkedList<>())
 				.build();
 		List<FlatEntity> flats = buildingEntity.getFlats();
-		for (FlatEntity flatEntity : flats) {
-			buildingTO.addFlatId(flatEntity.getId());
+		if (flats.size() != 0) {
+			for (FlatEntity flatEntity : flats) {
+				buildingTO.addFlatId(flatEntity.getId());	
+			}
 		}
 		return buildingTO;
 	}
 	
-	@SuppressWarnings("static-access")
-	public static BuildingEntity map2Entity(BuildingTO buildingTO, BuildingEntity buildingEntity, List<FlatEntity> flats) {
-		buildingEntity.builder()
-		.description(buildingTO.getDescription())
-		.localization(buildingTO.getLocalization())
-		.elevator(buildingTO.isElevator())
-		.flatsSum(buildingTO.getFlatsSum())
-		.floors(buildingTO.getFlatsSum())
-		.build();
-		for (FlatEntity flatEntity : flats) {
-			buildingEntity.addFlat(flatEntity);
-		}
+	public static BuildingEntity map2Entity(BuildingTO buildingTO, BuildingEntity buildingEntity) {
+		buildingEntity.setDescription(buildingTO.getDescription());
+		buildingEntity.setLocalization(buildingTO.getLocalization());
+		buildingEntity.setElevator(buildingTO.isElevator());
+		buildingEntity.setFlatsSum(buildingTO.getFlatsSum());
+		buildingEntity.setFloors(buildingTO.getFloors());
+		buildingEntity.setVersion(buildingTO.getVersion());
 		return buildingEntity;
 	}
 	
 	public static BuildingEntity map2Entity(BuildingTO buildingTO) {
 		BuildingEntity buildingEntity = new BuildingEntity();
-		buildingEntity = map2Entity(buildingTO, buildingEntity, null);
+		buildingEntity = map2Entity(buildingTO, buildingEntity);
 		return buildingEntity;
 	}
 }

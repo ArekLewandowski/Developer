@@ -12,5 +12,9 @@ public interface BuildingService {
 	
 	List<BuildingTO> findAll();
 	
-	BuildingTO getBuildingByLocalization(String localization);
+	List<BuildingTO> getBuildingByLocalization(String localization);
+
+	BuildingTO getBuildingById(Long id);
+
+	List<BuildingTO> getBuildingByFloors(int floors);
 }

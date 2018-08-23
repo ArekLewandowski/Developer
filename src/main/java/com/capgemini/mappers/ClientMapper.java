@@ -46,6 +46,7 @@ public class ClientMapper {
 		.firstName(clientTO.getFirstName())
 		.lastName(clientTO.getLastName())
 		.phone(clientTO.getPhone())
+		.version(clientTO.getVersion())
 		.build();
 		return clientEntity;
 	}

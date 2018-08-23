@@ -21,8 +21,6 @@ public interface ClientRepository extends JpaRepository<ClientEntity, Long> {
 	void delete(ClientEntity clientEntity);
 	
 	ClientEntity findOne(Long id);
-	
-	ClientEntity getOne(Long id);
 
 	List<ClientEntity> findAll();
 }
