@@ -1,8 +1,9 @@
 package com.capgemini.types;
 
+import java.util.LinkedList;
 import java.util.List;
 
-import com.capgemini.enums.FLAT_STATUS;
+import com.capgemini.enums.FlatStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,11 +22,11 @@ public class FlatTO {
 	private int floor;
 	private int balcoons;
 	private String address;
-	private FLAT_STATUS status;
+	private FlatStatus status;
 	private int price;
 	private Long buildingId;
 	private Long ownedClientId;
-	private List<Long> coownedClientId;
+	private List<Long> coownedClientId  = new LinkedList<>();
 	private Long version;
 	
 	public void addCoownedClientId(Long id){

@@ -3,7 +3,7 @@ package com.capgemini.service;
 import java.util.List;
 
 import com.capgemini.domain.BuildingEntity;
-import com.capgemini.enums.FLAT_STATUS;
+import com.capgemini.enums.FlatStatus;
 import com.capgemini.types.BuildingTO;
 import com.capgemini.types.FlatTO;
 
@@ -19,7 +19,7 @@ public interface FlatService {
 
 	FlatTO getFlatById(Long id);
 
-	List<FlatTO> getFlatByStatus(FLAT_STATUS status);
+	List<FlatTO> getFlatByStatus(FlatStatus status);
 	
 	List<FlatTO> getFlatByFloor(int floor);
 	
@@ -28,10 +28,6 @@ public interface FlatService {
 	List<FlatTO> getFlatByRoomsFromTO(int min, int max);
 	
 	List<FlatTO> getFlatByBalcoonsFromTO(int min, int max);
-
-	int avarigeFlatPriceInBuilding(BuildingTO buildingTO);
-	
-	int flatsWithStatusInBuilding(FLAT_STATUS status);
 	
 	int mostAvaibleBuilding();
 	
@@ -40,5 +36,8 @@ public interface FlatService {
 	FlatTO addFlatToBuilding(Long flatId, Long buildingId);
 
 	FlatTO removeFlatFromBuilding(Long flatId);
+
+	FlatTO updateFlat(FlatTO flatTO);
 	
+	List<FlatTO> findFlatByStatusAndBuilding(FlatStatus status, Long BuildingId);
 }

@@ -1,5 +1,6 @@
 package com.capgemini.mappers;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class FlatMapper {
 		.floor(flatEntity.getFloor())
 		.size(flatEntity.getSize())
 		.version(flatEntity.getVersion())
+		.coownedClientId(new ArrayList<>())
 		.build();
 		if (flatEntity.getOwner() != null) {
 			flatTO.setOwnedClientId(flatEntity.getOwner().getId());			

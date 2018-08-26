@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.capgemini.AllTests" time="0.343" tests="3" errors="0" skipped="0" failures="0">
+<testsuite name="com.capgemini.AllTests" time="1.399" tests="30" errors="1" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\projects\crash_course\jdk\jdk8\jre\bin"/>
     <property name="java.vm.version" value="25.66-b17"/>
     <property name="user.country.format" value="DE"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
-    <property name="maven.multiModuleProjectDirectory" value="C:\Users\alewando\Desktop\starter-kit-jpa-starter"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\projects\crash_course\workspaces\crash_course\Developer"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=";"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -17,7 +17,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="Service Pack 1"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\Users\alewando\Desktop\starter-kit-jpa-starter"/>
+    <property name="user.dir" value="C:\projects\crash_course\workspaces\crash_course\Developer"/>
     <property name="java.runtime.version" value="1.8.0_66-b17"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="C:\projects\crash_course\jdk\jdk8\jre\lib\endorsed"/>
@@ -39,12 +39,12 @@
     <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
     <property name="java.specification.version" value="1.8"/>
     <property name="file.encoding" value="Cp1252"/>
-    <property name="user.name" value="alewando"/>
+    <property name="user.name" value="ALEWANDO"/>
     <property name="java.class.path" value="C:\projects\crash_course\\maven\boot\plexus-classworlds-2.5.2.jar"/>
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="C:\projects\crash_course\jdk\jdk8\jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher install"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean install"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="en"/>
     <property name="user.language.format" value="de"/>
@@ -64,7 +64,84 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testShouldFindBookById" classname="com.capgemini.service.BookServiceTest" time="0.281"/>
-  <testcase name="testShouldFindBooksByAuthor" classname="com.capgemini.service.BookServiceTest" time="0.047"/>
-  <testcase name="testShouldFindBooksById" classname="com.capgemini.service.BookServiceTest" time="0.015"/>
+  <testcase name="testShouldGetBuildingByLocalization" classname="com.capgemini.service.BuildingServiceTest" time="0.166"/>
+  <testcase name="testShouldGetBuildingByFloors" classname="com.capgemini.service.BuildingServiceTest" time="0.02"/>
+  <testcase name="testShouldGetAverigePriceOfFlatInBuilding" classname="com.capgemini.service.BuildingServiceTest" time="0.116"/>
+  <testcase name="testShouldGetSumOfAllFlatsofClient" classname="com.capgemini.service.BuildingServiceTest" time="0.123"/>
+  <testcase name="testShouldAddAndGetBuilding" classname="com.capgemini.service.BuildingServiceTest" time="0.009"/>
+  <testcase name="testShouldFindAllBuildings" classname="com.capgemini.service.BuildingServiceTest" time="0.037"/>
+  <testcase name="testShouldAddClientAndGet" classname="com.capgemini.service.ClientServiceTest" time="0.01"/>
+  <testcase name="testShouldGetBuildingByLocalization" classname="com.capgemini.service.DAOTests" time="0.044"/>
+  <testcase name="testShouldGetBuilding" classname="com.capgemini.service.DAOTests" time="0.031"/>
+  <testcase name="testShouldAddBuilding" classname="com.capgemini.service.DAOTests" time="0.035"/>
+  <testcase name="testShouldGetSumPriceOfClientFlats" classname="com.capgemini.service.DAOTests" time="0.026"/>
+  <testcase name="testShouldGetFlatRooms" classname="com.capgemini.service.FlatServiceTest" time="0.042"/>
+  <testcase name="testShouldGetAndIncrementFlatsSum" classname="com.capgemini.service.FlatServiceTest" time="0.065"/>
+  <testcase name="testShouldAddAndGetFlatToBuilding" classname="com.capgemini.service.FlatServiceTest" time="0.026"/>
+  <testcase name="testShouldGetFlatBySize" classname="com.capgemini.service.FlatServiceTest" time="0.045"/>
+  <testcase name="testShouldGetFlatByStatus" classname="com.capgemini.service.FlatServiceTest" time="0.077"/>
+  <testcase name="testShouldRemoveAndDecrementFlatsSum" classname="com.capgemini.service.FlatServiceTest" time="0.041"/>
+  <testcase name="testShouldGetFlatByBuildingAndStatus" classname="com.capgemini.service.FlatServiceTest" time="0.027">
+    <error message="Parameter value [28] did not match expected type [com.capgemini.domain.BuildingEntity (n/a)]; nested exception is java.lang.IllegalArgumentException: Parameter value [28] did not match expected type [com.capgemini.domain.BuildingEntity (n/a)]" type="org.springframework.dao.InvalidDataAccessApiUsageException"><![CDATA[org.springframework.dao.InvalidDataAccessApiUsageException: Parameter value [28] did not match expected type [com.capgemini.domain.BuildingEntity (n/a)]; nested exception is java.lang.IllegalArgumentException: Parameter value [28] did not match expected type [com.capgemini.domain.BuildingEntity (n/a)]
+	at org.hibernate.jpa.spi.BaseQueryImpl.validateBinding(BaseQueryImpl.java:897)
+	at org.hibernate.jpa.internal.QueryImpl.access$000(QueryImpl.java:61)
+	at org.hibernate.jpa.internal.QueryImpl$ParameterRegistrationImpl.bindValue(QueryImpl.java:235)
+	at org.hibernate.jpa.spi.BaseQueryImpl.setParameter(BaseQueryImpl.java:638)
+	at org.hibernate.jpa.spi.AbstractQueryImpl.setParameter(AbstractQueryImpl.java:163)
+	at org.hibernate.jpa.spi.AbstractQueryImpl.setParameter(AbstractQueryImpl.java:32)
+	at org.springframework.data.jpa.repository.query.ParameterBinder.bind(ParameterBinder.java:138)
+	at org.springframework.data.jpa.repository.query.StringQueryParameterBinder.bind(StringQueryParameterBinder.java:61)
+	at org.springframework.data.jpa.repository.query.ParameterBinder.bind(ParameterBinder.java:100)
+	at org.springframework.data.jpa.repository.query.SpelExpressionStringQueryParameterBinder.bind(SpelExpressionStringQueryParameterBinder.java:69)
+	at org.springframework.data.jpa.repository.query.ParameterBinder.bindAndPrepare(ParameterBinder.java:160)
+	at org.springframework.data.jpa.repository.query.ParameterBinder.bindAndPrepare(ParameterBinder.java:151)
+	at org.springframework.data.jpa.repository.query.AbstractStringBasedJpaQuery.doCreateQuery(AbstractStringBasedJpaQuery.java:82)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.createQuery(AbstractJpaQuery.java:176)
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution$CollectionExecution.doExecute(JpaQueryExecution.java:114)
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution.execute(JpaQueryExecution.java:78)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.doExecute(AbstractJpaQuery.java:102)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.execute(AbstractJpaQuery.java:92)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.doInvoke(RepositoryFactorySupport.java:482)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.invoke(RepositoryFactorySupport.java:460)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:61)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:280)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:136)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:133)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:213)
+	at com.sun.proxy.$Proxy90.findFlatByStatusAndBuilding(Unknown Source)
+	at com.capgemini.service.impl.FlatServiceImpl.findFlatByStatusAndBuilding(FlatServiceImpl.java:149)
+	at com.capgemini.service.impl.FlatServiceImpl$$FastClassBySpringCGLIB$$560f3ffb.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:720)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:280)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:655)
+	at com.capgemini.service.impl.FlatServiceImpl$$EnhancerBySpringCGLIB$$5d5d27ce.findFlatByStatusAndBuilding(<generated>)
+	at com.capgemini.service.FlatServiceTest.testShouldGetFlatByBuildingAndStatus(FlatServiceTest.java:485)
+]]></error>
+  </testcase>
+  <testcase name="testShouldGetFlatByFloor" classname="com.capgemini.service.FlatServiceTest" time="0.007"/>
+  <testcase name="testShouldGetFlatByBuilding" classname="com.capgemini.service.FlatServiceTest" time="0.043"/>
+  <testcase name="testShouldShowDisabledApprFlats" classname="com.capgemini.service.FlatServiceTest" time="0.163"/>
+  <testcase name="testShouldAddAndGetFlat" classname="com.capgemini.service.FlatServiceTest" time="0"/>
+  <testcase name="testShouldNotReserveFlatOverLimit" classname="com.capgemini.service.ReservationServiceTest" time="0.021"/>
+  <testcase name="testShouldAddReservationWithCoowners" classname="com.capgemini.service.ReservationServiceTest" time="0.042"/>
+  <testcase name="testShouldAddCancelReservation" classname="com.capgemini.service.ReservationServiceTest" time="0.041"/>
+  <testcase name="testShouldBuyFlatWithReservedStatus" classname="com.capgemini.service.ReservationServiceTest" time="0.039"/>
+  <testcase name="testShouldNotBuyFlatWithReservedStatusWithOtherClient" classname="com.capgemini.service.ReservationServiceTest" time="0.037"/>
+  <testcase name="testShouldAddReservation" classname="com.capgemini.service.ReservationServiceTest" time="0.014"/>
+  <testcase name="testShouldBuyFlatWithFreeStatus" classname="com.capgemini.service.ReservationServiceTest" time="0.029"/>
+  <testcase name="testShouldNotBuyFlatWithSoldStatus" classname="com.capgemini.service.ReservationServiceTest" time="0.023"/>
 </testsuite>

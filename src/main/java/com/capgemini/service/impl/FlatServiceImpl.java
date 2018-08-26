@@ -7,24 +7,24 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.capgemini.dao.BuildingRepository;
-import com.capgemini.dao.FlatRepository;
 import com.capgemini.domain.BuildingEntity;
 import com.capgemini.domain.FlatEntity;
-import com.capgemini.enums.FLAT_STATUS;
+import com.capgemini.enums.FlatStatus;
 import com.capgemini.mappers.BuildingMapper;
 import com.capgemini.mappers.FlatMapper;
+import com.capgemini.repository.BuildingRepository;
+import com.capgemini.repository.FlatRepository;
 import com.capgemini.service.FlatService;
 import com.capgemini.types.BuildingTO;
 import com.capgemini.types.FlatTO;
 
 @Service
 @Transactional
-public class FlatServiceImpl implements FlatService{
-	
+public class FlatServiceImpl implements FlatService {
+
 	@Autowired
 	private FlatRepository flatRepository;
-	
+
 	@Autowired
 	private BuildingRepository buildingRepository;
 
@@ -36,29 +36,37 @@ public class FlatServiceImpl implements FlatService{
 	}
 
 	@Override
+	public FlatTO updateFlat(FlatTO flatTO) {
+		FlatEntity flatEntity = flatRepository.findOne(flatTO.getId());
+		flatEntity = FlatMapper.map2Entity(flatTO, flatEntity);
+		flatEntity = flatRepository.save(flatEntity);
+		return FlatMapper.map2TO(flatEntity);
+	}
+
+	@Override
 	public FlatTO addFlatToBuilding(Long flatId, Long buildingId) {
 		FlatEntity flatEntity = flatRepository.findOne(flatId);
 		BuildingEntity buildingEntity = buildingRepository.findOne(buildingId);
 		flatEntity.setBuilding(buildingEntity);
 		buildingEntity.addFlat(flatEntity);
-		buildingEntity.setFlatsSum(buildingEntity.getFlatsSum()+1);
+		buildingEntity.setFlatsSum(buildingEntity.getFlatsSum() + 1);
 		FlatTO flatTO = FlatMapper.map2TO(flatEntity);
 		BuildingTO buildindTO = BuildingMapper.map2TO(buildingEntity);
 		return flatTO;
 	}
-	
+
 	@Override
 	public FlatTO removeFlatFromBuilding(Long flatId) {
 		FlatEntity flatEntity = flatRepository.findOne(flatId);
 		BuildingEntity buildingEntity = buildingRepository.findOne(flatEntity.getBuilding().getId());
 		flatEntity.setBuilding(null);
 		buildingEntity.getFlats().remove(flatEntity);
-		buildingEntity.setFlatsSum(buildingEntity.getFlatsSum()-1);
+		buildingEntity.setFlatsSum(buildingEntity.getFlatsSum() - 1);
 		FlatTO flatTO = FlatMapper.map2TO(flatEntity);
 		BuildingTO buildindTO = BuildingMapper.map2TO(buildingEntity);
 		return flatTO;
 	}
-	
+
 	@Override
 	public FlatTO removeFlat(Long id) {
 		FlatEntity flatEntity = flatRepository.getOne(id);
@@ -89,7 +97,7 @@ public class FlatServiceImpl implements FlatService{
 	}
 
 	@Override
-	public List<FlatTO> getFlatByStatus(FLAT_STATUS status) {
+	public List<FlatTO> getFlatByStatus(FlatStatus status) {
 		List<FlatEntity> flatEntities = flatRepository.findByStatus(status);
 		List<FlatTO> flatTOs = FlatMapper.map2TOs(flatEntities);
 		return flatTOs;
@@ -111,28 +119,16 @@ public class FlatServiceImpl implements FlatService{
 
 	@Override
 	public List<FlatTO> getFlatByRoomsFromTO(int min, int max) {
-			List<FlatEntity> flatEntities = flatRepository.findByRoomsBetween(min, max);
-			List<FlatTO> flatTOs = FlatMapper.map2TOs(flatEntities);
-			return flatTOs;
+		List<FlatEntity> flatEntities = flatRepository.findByRoomsBetween(min, max);
+		List<FlatTO> flatTOs = FlatMapper.map2TOs(flatEntities);
+		return flatTOs;
 	}
 
 	@Override
 	public List<FlatTO> getFlatByBalcoonsFromTO(int min, int max) {
-			List<FlatEntity> flatEntities = flatRepository.findByBalcoonsBetween(min, max);
-			List<FlatTO> flatTOs = FlatMapper.map2TOs(flatEntities);
-			return flatTOs;
-	}
-
-	@Override
-	public int avarigeFlatPriceInBuilding(BuildingTO buildingTO) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int flatsWithStatusInBuilding(FLAT_STATUS status) {
-		// TODO Auto-generated method stub
-		return 0;
+		List<FlatEntity> flatEntities = flatRepository.findByBalcoonsBetween(min, max);
+		List<FlatTO> flatTOs = FlatMapper.map2TOs(flatEntities);
+		return flatTOs;
 	}
 
 	@Override
@@ -143,8 +139,16 @@ public class FlatServiceImpl implements FlatService{
 
 	@Override
 	public List<FlatTO> disabledAppropriateFlats() {
-		// TODO Auto-generated method stub
-		return null;
+		List<FlatEntity> flatEntities = flatRepository.findDisabledAppropriateFlats();
+		List<FlatTO> flats = FlatMapper.map2TOs(flatEntities);
+		return flats;
+	}
+
+	@Override
+	public List<FlatTO> findFlatByStatusAndBuilding(FlatStatus status, Long BuildingId) {
+		List<FlatEntity> flatEntities = flatRepository.findFlatByStatusAndBuilding(status, BuildingId);
+		List<FlatTO> flatTOs = FlatMapper.map2TOs(flatEntities);
+		return flatTOs;
 	}
 
 }

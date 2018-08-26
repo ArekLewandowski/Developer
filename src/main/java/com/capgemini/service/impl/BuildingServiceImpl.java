@@ -8,9 +8,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.capgemini.dao.BuildingRepository;
 import com.capgemini.domain.BuildingEntity;
 import com.capgemini.mappers.BuildingMapper;
+import com.capgemini.repository.BuildingRepository;
+import com.capgemini.repository.FlatRepository;
 import com.capgemini.service.BuildingService;
 import com.capgemini.types.BuildingTO;
 
@@ -20,6 +21,9 @@ public class BuildingServiceImpl implements BuildingService {
 
 	@Autowired
 	BuildingRepository buildingRepository;
+	
+	@Autowired
+	FlatRepository flatRepository;
 	
 	@Override
 	public BuildingTO addBuilding(BuildingTO buildingTO) {
@@ -74,5 +78,17 @@ public class BuildingServiceImpl implements BuildingService {
 			buildingTOs.add(BuildingMapper.map2TO(buildingEntity));
 		}
 		return buildingTOs;
+	}
+
+	@Override
+	public Integer getAveragePriceOfApartmentInSelectedBuilding(Long buildingId) {
+		int averidgePrice = buildingRepository.averageCostOfFlatInBuilding(buildingId);
+		return averidgePrice;
+	}
+
+	@Override
+	public Integer sumAllFlatsOfSelectedClient(Long clientId) {
+		int sumOfClientFlats = buildingRepository.sumAllBoughtFlatsByClient(clientId);
+		return sumOfClientFlats;
 	}
 }

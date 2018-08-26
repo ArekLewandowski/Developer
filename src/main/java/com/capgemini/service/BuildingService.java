@@ -17,4 +17,9 @@ public interface BuildingService {
 	BuildingTO getBuildingById(Long id);
 
 	List<BuildingTO> getBuildingByFloors(int floors);
+	
+	Integer getAveragePriceOfApartmentInSelectedBuilding(Long buildingId);
+	
+	Integer sumAllFlatsOfSelectedClient(Long clientId);
+	
 }

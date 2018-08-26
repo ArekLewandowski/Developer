@@ -5,9 +5,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.capgemini.dao.ClientRepository;
 import com.capgemini.domain.ClientEntity;
 import com.capgemini.mappers.ClientMapper;
+import com.capgemini.repository.ClientRepository;
 import com.capgemini.service.ClientService;
 import com.capgemini.types.ClientTO;
 

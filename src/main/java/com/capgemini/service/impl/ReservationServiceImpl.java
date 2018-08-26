@@ -1,56 +1,143 @@
 package com.capgemini.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.capgemini.dao.ClientRepository;
-import com.capgemini.dao.FlatRepository;
 import com.capgemini.domain.ClientEntity;
 import com.capgemini.domain.FlatEntity;
-import com.capgemini.enums.FLAT_STATUS;
+import com.capgemini.enums.FlatStatus;
+import com.capgemini.exceptions.FlatNotAvaibleExcepion;
+import com.capgemini.exceptions.OverReservationLimitException;
+import com.capgemini.mappers.ClientMapper;
+import com.capgemini.mappers.FlatMapper;
+import com.capgemini.repository.ClientRepository;
+import com.capgemini.repository.FlatRepository;
 import com.capgemini.service.ReservationService;
 import com.capgemini.types.ClientTO;
 import com.capgemini.types.FlatTO;
 
 @Service
-public class ReservationServiceImpl implements ReservationService{
-	
+@Transactional
+public class ReservationServiceImpl implements ReservationService {
+
+	private static final int RESERVATION_LIMIT = 3;
+
 	@Autowired
-	FlatRepository flatRepository;
-	
+	private FlatRepository flatRepository;
+
 	@Autowired
-	ClientRepository clientRepository;
+	private ClientRepository clientRepository;
 
 	@Override
 	public FlatTO reserveFlat(FlatTO flatTO, ClientTO clientTO) {
-		FlatEntity flatEntity = flatRepository.getOne(flatTO.getId());
-		ClientEntity clientEntity = clientRepository.findOne(clientTO.getId());
-		flatEntity.setStatus(FLAT_STATUS.RESERVED);
-		flatEntity.setOwner(clientEntity);
-		clientEntity.addOwned(flatEntity);
+		flatTO = reserveFlatWithCoowner(flatTO, clientTO, new ArrayList<>());
 		return flatTO;
 	}
-	
+
 	@Override
 	public FlatTO reserveFlatWithCoowner(FlatTO flatTO, ClientTO clientTO, List<ClientTO> coowners) {
 		FlatEntity flatEntity = flatRepository.getOne(flatTO.getId());
 		ClientEntity clientEntity = clientRepository.findOne(clientTO.getId());
-		flatEntity.setStatus(FLAT_STATUS.RESERVED);
-		return null;
+		if (!flatEntity.getStatus().equals(FlatStatus.FREE)) {
+			throw new FlatNotAvaibleExcepion();
+		}
+		int reservedFlats = 0;
+
+		if (!clientEntity.getOwned().isEmpty()) {
+			List<FlatEntity> ownedFlats = clientEntity.getOwned();
+			for (FlatEntity flatEntityOwn : ownedFlats) {
+				if (flatEntityOwn.getStatus().equals(FlatStatus.RESERVED)) {
+					reservedFlats++;
+				}
+			}
+		}
+		if (reservedFlats >= RESERVATION_LIMIT) {
+			throw new OverReservationLimitException();
+		}
+		flatEntity.setStatus(FlatStatus.RESERVED);
+		flatEntity.setOwner(clientEntity);
+		clientEntity.addOwned(flatEntity);
+
+		for (ClientTO clientTO2 : coowners) {
+			ClientEntity coownerEntity = clientRepository.findOne(clientTO2.getId());
+			flatEntity.addCoowner(coownerEntity);
+			coownerEntity.addCoowned(flatEntity);
+		}
+		flatTO = FlatMapper.map2TO(flatEntity);
+
+		return flatTO;
 	}
 
 	@Override
 	public FlatTO buyFlat(FlatTO flatTO, ClientTO clientTO) {
-		// TODO Auto-generated method stub
+		flatTO = buyFlatWithCoowners(flatTO, clientTO, new ArrayList<>());
+		return flatTO;
+	}
+
+	@Override
+	public FlatTO buyFlatWithCoowners(FlatTO flatTO, ClientTO clientTO, List<ClientTO> coowners) {
+		FlatEntity flatEntity = flatRepository.getOne(flatTO.getId());
+		ClientEntity clientEntity = clientRepository.findOne(clientTO.getId());
+		if (flatEntity.getStatus().equals(FlatStatus.SOLD)) {
+			throw new FlatNotAvaibleExcepion();
+		} else if (flatEntity.getStatus().equals(FlatStatus.RESERVED)
+				&& !(flatEntity.getOwner().getId().equals(clientEntity.getId()))) {
+			throw new FlatNotAvaibleExcepion();
+		} else {
+			flatEntity.setStatus(FlatStatus.SOLD);
+			flatEntity.setOwner(clientEntity);
+			clientEntity.addOwned(flatEntity);
+		}
+		for (ClientTO clientTO2 : coowners) {
+			ClientEntity coownerEntity = clientRepository.findOne(clientTO2.getId());
+			flatEntity.addCoowner(coownerEntity);
+			coownerEntity.addCoowned(flatEntity);
+		}
+		flatTO = FlatMapper.map2TO(flatEntity);
+
+		return flatTO;
+	}
+
+	@Override
+	public FlatTO cancelReservation(FlatTO flatTO) {
+		FlatEntity flatEntity = flatRepository.findOne(flatTO.getId());
+		ClientEntity ownerEntity = clientRepository.findOne(flatEntity.getOwner().getId());
+		if (flatEntity.getCoowner().equals(0) || flatEntity.getCoowner() == null) {
+			List<ClientEntity> coowners = flatEntity.getCoowner();
+			for (ClientEntity clientEntity : coowners) {
+				clientEntity.getCoowned().remove(flatEntity);
+			}
+			flatEntity.getCoowner().clear();
+		}
+		ownerEntity.getOwned().remove(flatEntity);
+		flatEntity.setOwner(null);
+		flatEntity.setStatus(FlatStatus.FREE);
 		return null;
 	}
 
 	@Override
-	public FlatTO cancelReservation(FlatTO flatTO, ClientTO clientTO) {
-		// TODO Auto-generated method stub
-		return null;
+	public FlatStatus getFlatStatus(Long flatId) {
+		FlatStatus status = flatRepository.findOne(flatId).getStatus();
+		return status;
+	}
+
+	@Override
+	public ClientTO getFlatOwner(Long flatId) {
+		ClientEntity clientEntity = flatRepository.findOne(flatId).getOwner();
+		ClientTO clientTO = ClientMapper.map2TO(clientEntity);
+		return clientTO;
+	}
+
+	@Override
+	public List<ClientTO> getFlatCoowner(Long flatId) {
+		List<ClientEntity> coownerEntities = flatRepository.findOne(flatId).getCoowner();
+		List<ClientTO> coownerTOs = ClientMapper.map2TOs(coownerEntities);
+		return coownerTOs;
 	}
 
 }

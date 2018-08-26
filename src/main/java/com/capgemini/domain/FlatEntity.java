@@ -16,7 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
-import com.capgemini.enums.FLAT_STATUS;
+import com.capgemini.enums.FlatStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -49,7 +49,7 @@ public class FlatEntity extends AbstractEntity{
 	@Column
 	private String address;
 	@Column
-	private FLAT_STATUS status;
+	private FlatStatus status;
 	@Column
 	private int price;
 	

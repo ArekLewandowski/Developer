@@ -18,6 +18,8 @@ public class ClientMapper {
 				.phone(clientEntity.getPhone())
 				.email(clientEntity.getEmail())
 				.version(clientEntity.getVersion())
+				.ownedId(new LinkedList<>())
+				.coownedId(new LinkedList<>())
 				.build();
 		List<FlatEntity> ownedFlats = clientEntity.getOwned();
 		if (ownedFlats != null) {
