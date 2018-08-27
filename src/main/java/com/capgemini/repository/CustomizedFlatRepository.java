@@ -8,5 +8,5 @@ import com.capgemini.domain.FlatEntity;
 
 public interface CustomizedFlatRepository {
 
-	 List<FlatEntity> findFlatByVariousCriteria(FlatSearchCriteriaTO FlatSearchCriteriaTO);
+	 List<FlatEntity> findFlatByVariousCriteria(FlatSearchCriteriaTO flatSearchCriteriaTO);
 }

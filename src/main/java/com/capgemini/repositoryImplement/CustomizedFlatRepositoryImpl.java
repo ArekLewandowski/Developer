@@ -1,82 +1,57 @@
-//package com.capgemini.repositoryImplement;
-//
-//import java.util.List;
-//
-//import javax.persistence.TypedQuery;
-//
-//import com.capgemini.domain.FlatEntity;
-//import com.capgemini.repository.CustomizedFlatRepository;
-//import com.capgemini.types.FlatSearchCriteriaTO;
-//
-//public class CustomizedFlatRepositoryImpl implements CustomizedFlatRepository {
-//
-//	@Override
-//	public List<FlatEntity> findFlatByVariousCriteria(FlatSearchCriteriaTO flatSearchCriteriaTO) {
-//		StringBuilder queryBuilder = new StringBuilder();
-//        queryBuilder.append("select a from ApartmentEntity a where ");
-//        boolean canAppendQueryByAnd = false;
-//
-//        if (flatSearchCriteriaTO.getMinSize() != null) {
-//            queryBuilder.append("a.apartmentSize >= :minApartmentSize");
-//            canAppendQueryByAnd = true;
-//        }
-//        if (flatSearchCriteriaTO.getMaxSize() != null) {
-//            if (canAppendQueryByAnd) {
-//                queryBuilder.append(" and ");
-//            }
-//            queryBuilder.append("a.apartmentSize <= :maxApartmentSize");
-//            canAppendQueryByAnd = true;
-//        }
-//        if (flatSearchCriteriaTO.getMinRooms() != null) {
-//            if (canAppendQueryByAnd) {
-//                queryBuilder.append(" and ");
-//            }
-//            queryBuilder.append("a.roomNo >= :minRoomNo");
-//            canAppendQueryByAnd = true;
-//        }
-//        if (flatSearchCriteriaTO.getMaxRooms() != null) {
-//            if (canAppendQueryByAnd) {
-//                queryBuilder.append(" and ");
-//            }
-//            queryBuilder.append("a.roomNo <= :maxRoomNo");
-//            canAppendQueryByAnd = true;
-//        }
-//        if (flatSearchCriteriaTO.getMinBalcons() != null) {
-//            if (canAppendQueryByAnd) {
-//                queryBuilder.append(" and ");
-//            }
-//            queryBuilder.append("a.balconyNo >= :minBalconyNo");
-//            canAppendQueryByAnd = true;
-//        }
-//        if (flatSearchCriteriaTO.getMaxBalcons() != null) {
-//            if (canAppendQueryByAnd) {
-//                queryBuilder.append(" and ");
-//            }
-//            queryBuilder.append("a.balconyNo <= :maxBalconyNo");
-//        }
-//
-//        TypedQuery<FlatEntity> query = entityManager.createQuery(queryBuilder.toString(), FlatEntity.class);
-//
-//        if (flatSearchCriteriaTO.getMinSize() != null) {
-//            query.setParameter("minApartmentSize", flatSearchCriteriaTO.getMinSize());
-//        }
-//        if (flatSearchCriteriaTO.getMaxSize() != null) {
-//            query.setParameter("maxApartmentSize", flatSearchCriteriaTO.getMaxSize());
-//        }
-//        if (flatSearchCriteriaTO.getMinRooms() != null) {
-//            query.setParameter("minRoomNo", flatSearchCriteriaTO.getMinRooms());
-//        }
-//        if (flatSearchCriteriaTO.getMaxRooms() != null) {
-//            query.setParameter("maxRoomNo", flatSearchCriteriaTO.getMaxRooms());
-//        }
-//        if (flatSearchCriteriaTO.getMinBalcons() != null) {
-//            query.setParameter("minBalconyNo", flatSearchCriteriaTO.getMinBalcons());
-//        }
-//        if (flatSearchCriteriaTO.getMaxBalcons() != null) {
-//            query.setParameter("maxBalconyNo", flatSearchCriteriaTO.getMaxBalcons());
-//        }
-//
-//        return query.getResultList();
-//    }
-//
-//}
+package com.capgemini.repositoryImplement;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
+import com.capgemini.domain.FlatEntity;
+import com.capgemini.enums.FlatStatus;
+import com.capgemini.repository.CustomizedFlatRepository;
+import com.capgemini.types.FlatSearchCriteriaTO;
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+
+@Repository
+public class CustomizedFlatRepositoryImpl implements CustomizedFlatRepository {
+
+	@PersistenceContext
+	protected EntityManager entityManager;
+
+	@Override
+	public List<FlatEntity> findFlatByVariousCriteria(FlatSearchCriteriaTO flatSearchCriteriaTO) {
+
+		QFlatEntity flat = QFlatEntity.flatEntity;
+
+		JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
+
+		BooleanBuilder builder = new BooleanBuilder();
+		builder.and(flat.status.eq(FlatStatus.FREE));
+
+		if (flatSearchCriteriaTO.getMinSize() != null) {
+			builder.and(flat.size.goe(flatSearchCriteriaTO.getMinSize()));
+		}
+		if (flatSearchCriteriaTO.getMaxSize() != null) {
+			builder.and(flat.area.loe(flatSearchCriteriaTO.getMaxSize()));
+		}
+		if (flatSearchCriteriaTO.getMinRooms() != null) {
+			builder.and(flat.roomsCount.goe(flatSearchCriteriaTO.getMinRooms()));
+		}
+		if (flatSearchCriteriaTO.getMaxRooms() != null) {
+			builder.and(flat.roomsCount.loe(flatSearchCriteriaTO.getMaxRooms()));
+		}
+		if (flatSearchCriteriaTO.getMinBalcons() != null) {
+			builder.and(flat.balconyCount.goe(flatSearchCriteriaTO.getMinBalcons()));
+		}
+		if (flatSearchCriteriaTO.getMaxBalcons() != null) {
+			builder.and(flat.balconyCount.loe(flatSearchCriteriaTO.getMaxBalcons()));
+		}
+
+		List<FlatEntity> result = queryFactory.selectFrom(flat).where(builder).fetch();
+
+		return result;
+
+	}
+
+}

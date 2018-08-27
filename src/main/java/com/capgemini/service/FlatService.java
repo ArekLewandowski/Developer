@@ -29,8 +29,6 @@ public interface FlatService {
 	
 	List<FlatTO> getFlatByBalcoonsFromTO(int min, int max);
 	
-	int mostAvaibleBuilding();
-	
 	List<FlatTO> disabledAppropriateFlats();
 
 	FlatTO addFlatToBuilding(Long flatId, Long buildingId);

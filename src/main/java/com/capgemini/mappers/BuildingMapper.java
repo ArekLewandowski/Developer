@@ -44,4 +44,20 @@ public class BuildingMapper {
 		buildingEntity = map2Entity(buildingTO, buildingEntity);
 		return buildingEntity;
 	}
+	
+	public static List<BuildingEntity> map2Entities(List<BuildingTO> buildingTOs){
+		List<BuildingEntity> buildingEntities = new LinkedList<>();
+		for (BuildingTO buildingTO : buildingTOs) {
+			buildingEntities.add(map2Entity(buildingTO));
+		}
+		return buildingEntities;
+	}
+	
+	public static List<BuildingTO> map2TOs(List<BuildingEntity> buildingEntities){
+		List<BuildingTO> buildingTOs = new LinkedList<>();
+		for (BuildingEntity buildingEntity : buildingEntities) {
+			buildingTOs.add(BuildingMapper.map2TO(buildingEntity));
+		}
+		return buildingTOs;
+	}
 }

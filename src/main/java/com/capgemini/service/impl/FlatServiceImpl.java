@@ -2,6 +2,7 @@ package com.capgemini.service.impl;
 
 import java.util.List;
 
+import javax.persistence.OptimisticLockException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,9 @@ public class FlatServiceImpl implements FlatService {
 	@Override
 	public FlatTO updateFlat(FlatTO flatTO) {
 		FlatEntity flatEntity = flatRepository.findOne(flatTO.getId());
+		if (flatEntity.getVersion() != flatTO.getVersion()) {
+			throw new OptimisticLockException();
+		}
 		flatEntity = FlatMapper.map2Entity(flatTO, flatEntity);
 		flatEntity = flatRepository.save(flatEntity);
 		return FlatMapper.map2TO(flatEntity);
@@ -129,12 +133,6 @@ public class FlatServiceImpl implements FlatService {
 		List<FlatEntity> flatEntities = flatRepository.findByBalcoonsBetween(min, max);
 		List<FlatTO> flatTOs = FlatMapper.map2TOs(flatEntities);
 		return flatTOs;
-	}
-
-	@Override
-	public int mostAvaibleBuilding() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override

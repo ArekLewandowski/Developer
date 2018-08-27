@@ -36,7 +36,7 @@ public class AbstractTest {
 		// when
 		FlatTO gettedFlat = flatService.getFlatById(flatTO.getId());
 		gettedFlat.setBalcoons(5);
-		flatService.updateFlat(flatTO);
+		flatService.updateFlat(gettedFlat);
 		FlatTO updatedFlat = flatService.getFlatById(flatTO.getId());
 
 		long version2 = updatedFlat.getVersion();

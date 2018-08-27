@@ -3,6 +3,7 @@ package com.capgemini.service.impl;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.OptimisticLockException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,17 @@ public class BuildingServiceImpl implements BuildingService {
 	@Override
 	public BuildingTO addBuilding(BuildingTO buildingTO) {
 		BuildingEntity bEntity = BuildingMapper.map2Entity(buildingTO);
+		bEntity = buildingRepository.save(bEntity);
+		return BuildingMapper.map2TO(bEntity);
+	}
+	
+	@Override
+	public BuildingTO updateBuilding(BuildingTO buildingTO) {
+		BuildingEntity currentEntity = buildingRepository.findOne(buildingTO.getId());
+		if (currentEntity.getVersion() != buildingTO.getVersion()) {
+			throw new OptimisticLockException(); 
+		}
+		BuildingEntity bEntity = BuildingMapper.map2Entity(buildingTO, currentEntity);
 		bEntity = buildingRepository.save(bEntity);
 		return BuildingMapper.map2TO(bEntity);
 	}
@@ -90,5 +102,12 @@ public class BuildingServiceImpl implements BuildingService {
 	public Integer sumAllFlatsOfSelectedClient(Long clientId) {
 		int sumOfClientFlats = buildingRepository.sumAllBoughtFlatsByClient(clientId);
 		return sumOfClientFlats;
+	}
+	
+	@Override
+	public List<BuildingTO> mostAvaibleBuilding() {
+		int max = flatRepository.getMaxOfFreeFlatsInBuilding();
+		List<BuildingEntity> buildingEntities = flatRepository.getMostAvelibleBuildings(max);
+		return BuildingMapper.map2TOs(buildingEntities);
 	}
 }

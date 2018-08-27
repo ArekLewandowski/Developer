@@ -21,5 +21,9 @@ public interface BuildingService {
 	Integer getAveragePriceOfApartmentInSelectedBuilding(Long buildingId);
 	
 	Integer sumAllFlatsOfSelectedClient(Long clientId);
+
+	BuildingTO updateBuilding(BuildingTO buildingTO);
+
+	List<BuildingTO> mostAvaibleBuilding();
 	
 }

@@ -296,10 +296,7 @@ public class BuildingServiceTest {
 		flatService.addFlatToBuilding(flatTO3.getId(), buildingTO.getId());
 		flatService.addFlatToBuilding(flatTO4.getId(), buildingTO2.getId());
 		flatService.addFlatToBuilding(flatTO5.getId(), buildingTO2.getId());
-	
-	
-		//when
-		
+
 		int cost1 = buildingService.sumAllFlatsOfSelectedClient(clientTO.getId());
 		int cost2 = buildingService.sumAllFlatsOfSelectedClient(clientTO2.getId());
 
@@ -308,4 +305,65 @@ public class BuildingServiceTest {
 		Assert.assertEquals(sum2, cost2);
 	}
 	
+	@Test
+	public void testShouldGetMostAvelibleBuilding() {
+		
+		//given	
+		FlatTO flatTO = new FlatTO();
+		flatTO.setAddress("A2");
+		flatTO.setPrice(100000);
+		flatTO.setStatus(FlatStatus.RESERVED);
+		
+		FlatTO flatTO2 = new FlatTO();
+		flatTO2.setAddress("A4");
+		flatTO2.setPrice(200000);
+		flatTO2.setStatus(FlatStatus.FREE);
+		flatTO2 = flatService.addFlat(flatTO2);
+		
+		FlatTO flatTO3 = new FlatTO();
+		flatTO3.setAddress("A5");
+		flatTO3.setPrice(160000);
+		flatTO3.setStatus(FlatStatus.SOLD);
+		flatTO3 = flatService.addFlat(flatTO3);
+		
+		FlatTO flatTO4= new FlatTO();
+		flatTO4.setAddress("A6");
+		flatTO4.setPrice(120000);
+		flatTO4.setStatus(FlatStatus.FREE);
+		flatTO4 = flatService.addFlat(flatTO4);
+		
+		FlatTO flatTO5 = new FlatTO(); 
+		flatTO5.setAddress("A5");
+		flatTO5.setPrice(140000);
+		flatTO5.setStatus(FlatStatus.FREE);
+		flatTO5 = flatService.addFlat(flatTO5);
+		
+		BuildingTO buildingTO = new BuildingTO();
+		buildingTO.setLocalization("Poznań");
+		buildingTO = buildingService.addBuilding(buildingTO);
+		
+		BuildingTO buildingTO2 = new BuildingTO();
+		buildingTO2.setLocalization("Wrocław");
+		buildingTO2 = buildingService.addBuilding(buildingTO2);
+		
+		flatTO = flatService.addFlat(flatTO);
+		flatTO2 = flatService.addFlat(flatTO2);
+		flatTO3 = flatService.addFlat(flatTO3);
+		flatTO4 = flatService.addFlat(flatTO4);
+		flatTO5 = flatService.addFlat(flatTO5);
+		
+		//when
+		flatService.addFlatToBuilding(flatTO.getId(), buildingTO.getId());
+		flatService.addFlatToBuilding(flatTO2.getId(), buildingTO.getId());
+		
+		flatService.addFlatToBuilding(flatTO3.getId(), buildingTO2.getId());
+		flatService.addFlatToBuilding(flatTO4.getId(), buildingTO2.getId());
+		flatService.addFlatToBuilding(flatTO5.getId(), buildingTO2.getId());
+		
+		List<BuildingTO> buildingTOs = buildingService.mostAvaibleBuilding();
+
+		//then
+		Assert.assertEquals(1, buildingTOs.size());
+	
+	}
 }

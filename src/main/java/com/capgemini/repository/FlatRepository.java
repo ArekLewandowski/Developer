@@ -46,4 +46,12 @@ public interface FlatRepository extends JpaRepository<FlatEntity, Long> {
 
 	@Query("select f from FlatEntity f join f.building b where b.elevator = true or f.floor = 0")
 	List<FlatEntity> findDisabledAppropriateFlats();
+
+	@Query("select count(*) from FlatEntity f where f.status = 'FREE' group by f.building")
+	Integer getMaxOfFreeFlatsInBuilding();
+
+	@Query("select f.building from FlatEntity f where f.status = 'FREE' and count(*) = :max group by f.building")
+	List<BuildingEntity> getMostAvelibleBuildings(@Param("max") int max);
 }
+
+
