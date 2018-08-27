@@ -32,8 +32,8 @@ import lombok.Setter;
 @Entity
 @Table(name = "BUILDING")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@EntityListeners({OnCreateListener.class, OnUpdateListener.class})
-public class BuildingEntity extends AbstractEntity{
+@EntityListeners({ OnCreateListener.class, OnUpdateListener.class })
+public class BuildingEntity extends AbstractEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,13 +47,13 @@ public class BuildingEntity extends AbstractEntity{
 	@Column
 	private boolean elevator;
 	@Column
-	private int flatsSum;	
+	private int flatsSum;
 	@OneToMany(mappedBy = "building", cascade = CascadeType.REMOVE)
 	private List<FlatEntity> flats = new LinkedList<>();
 	@Version
 	private Long version;
-	
-	public void addFlat(FlatEntity fEntity){
+
+	public void addFlat(FlatEntity fEntity) {
 		this.flats.add(fEntity);
 	}
 }

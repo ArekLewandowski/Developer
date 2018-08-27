@@ -48,7 +48,7 @@ public class BuildingServiceTest {
 		// then
 		Assert.assertEquals(buildingTO, gettedBuilding);
 	}
-	
+
 	@Test
 	public void testShouldUpdateBuilding() {
 
@@ -323,13 +323,13 @@ public class BuildingServiceTest {
 		flatService.addFlatToBuilding(flatTO4.getId(), buildingTO2.getId());
 		flatService.addFlatToBuilding(flatTO5.getId(), buildingTO2.getId());
 
-//		List<Long> buildingTOs = buildingService.mostAvaibleBuilding();
+//		 List<Long> buildingTOs = buildingService.mostAvaibleBuilding();
 
-//		// then
-//		Assert.assertEquals(1, buildingTOs.size());
+		 // then
+//		 Assert.assertEquals(1, buildingTOs.size());
 
 	}
-	
+
 	@Test
 	public void testShouldRemoveFlatFromBuildingWithBuilding() {
 
@@ -384,13 +384,13 @@ public class BuildingServiceTest {
 		flatService.addFlatToBuilding(flatTO3.getId(), buildingTO2.getId());
 		flatService.addFlatToBuilding(flatTO4.getId(), buildingTO2.getId());
 		flatService.addFlatToBuilding(flatTO5.getId(), buildingTO2.getId());
-		
+
 		Long flatTOId = flatTO.getId();
 
 		boolean exception = false;
 		buildingService.removeBuilding(buildingTO.getId());
 		try {
-			flatService.getFlatById(flatTOId);			
+			flatService.getFlatById(flatTOId);
 		} catch (NoSuchElementException e) {
 			exception = true;
 		}

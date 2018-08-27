@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.capgemini.domain.ClientEntity;
 import com.capgemini.repository.ClientRepository;
 import com.capgemini.types.ClientTO;
 import com.capgemini.types.FlatTO;
@@ -22,9 +21,6 @@ public class ClientServiceTest {
 
 	@Autowired
 	private ClientService clientService;
-
-	@Autowired
-	private ClientRepository clientRepository;
 
 	@Autowired
 	private FlatService flatService;
@@ -118,10 +114,9 @@ public class ClientServiceTest {
 		reservationService.buyFlat(flatTO2, clientTO);
 		reservationService.buyFlat(flatTO3, clientTO2);
 
-
 		List<ClientTO> clientsWithMoreFlats = clientService.findClientsWithMoreThan1Flat();
-		 
-		//then
+
+		// then
 		Assert.assertFalse(clientsWithMoreFlats.isEmpty());
 
 	}

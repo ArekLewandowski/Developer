@@ -26,9 +26,6 @@ public class ReservationServiceTest {
 	private ClientService clientService;
 
 	@Autowired
-	private BuildingService buildingService;
-
-	@Autowired
 	private ReservationService reservationService;
 
 	@Test
@@ -329,7 +326,7 @@ public class ReservationServiceTest {
 		flatTO.setStatus("FREE");
 		flatTO.setPrice(205000);
 		flatTO = flatService.addFlat(flatTO);
-		
+
 		ClientTO clientTO = ClientTO.builder().firstName("Jan").lastName("Tomaszewski").address("Poznań, ul.Garbary 3")
 				.email("jt@wp.pl").build();
 		clientTO = clientService.addClient(clientTO);
@@ -355,15 +352,15 @@ public class ReservationServiceTest {
 		flatTO.setStatus("FREE");
 		flatTO.setPrice(205000);
 		flatTO = flatService.addFlat(flatTO);
-		
+
 		ClientTO clientTO = ClientTO.builder().firstName("Jan").lastName("Tomaszewski").address("Poznań, ul.Garbary 3")
 				.email("jt@wp.pl").build();
 		clientTO = clientService.addClient(clientTO);
-		
+
 		ClientTO clientTO2 = ClientTO.builder().firstName("Zbigniew").lastName("Boniek").address("Poznań, ul.PZPNu 1")
 				.email("zb@wp.pl").build();
 		clientTO2 = clientService.addClient(clientTO2);
-		
+
 		List<ClientTO> coowners = new ArrayList<>();
 		coowners.add(clientTO2);
 
@@ -389,7 +386,7 @@ public class ReservationServiceTest {
 		flatTO.setStatus("FREE");
 		flatTO.setPrice(205000);
 		flatTO = flatService.addFlat(flatTO);
-		
+
 		ClientTO clientTO = ClientTO.builder().firstName("Jan").lastName("Tomaszewski").address("Poznań, ul.Garbary 3")
 				.email("jt@wp.pl").build();
 		clientTO = clientService.addClient(clientTO);

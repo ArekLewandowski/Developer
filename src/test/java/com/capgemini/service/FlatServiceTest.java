@@ -10,12 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.capgemini.repository.CustomizedFlatRepository;
 import com.capgemini.types.BuildingTO;
 import com.capgemini.types.FlatSearchCriteriaTO;
 import com.capgemini.types.FlatTO;
-
-import javassist.expr.NewArray;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -47,10 +44,10 @@ public class FlatServiceTest {
 		// then
 		Assert.assertEquals(addedflatTO.getRooms(), flatTO.getRooms());
 	}
-	
+
 	@Test
 	public void testShouldFindAllFlats() {
-		
+
 		List<FlatTO> preAddedFlatTOs = flatService.findAll();
 
 		// given
@@ -63,7 +60,7 @@ public class FlatServiceTest {
 		flatTO.setStatus("FREE");
 		flatTO.setPrice(205000);
 		flatTO = flatService.addFlat(flatTO);
-		
+
 		FlatTO flatTO2 = new FlatTO();
 		flatTO2.setAddress("A1");
 		flatTO2.setBalcoons(2);
@@ -77,16 +74,16 @@ public class FlatServiceTest {
 		// when
 		FlatTO addedflatTO = flatService.getFlatById(flatTO.getId());
 		FlatTO addedflatTO2 = flatService.getFlatById(flatTO2.getId());
-		
+
 		List<FlatTO> flatTOs = flatService.findAll();
 
 		// then
-		Assert.assertEquals(preAddedFlatTOs.size()+2, flatTOs.size());
+		Assert.assertEquals(preAddedFlatTOs.size() + 2, flatTOs.size());
 	}
-	
+
 	@Test
 	public void testShouldRemoveFlats() {
-		
+
 		List<FlatTO> preAddedFlatTOs = flatService.findAll();
 
 		// given
@@ -99,7 +96,7 @@ public class FlatServiceTest {
 		flatTO.setStatus("FREE");
 		flatTO.setPrice(205000);
 		flatTO = flatService.addFlat(flatTO);
-		
+
 		FlatTO flatTO2 = new FlatTO();
 		flatTO2.setAddress("A1");
 		flatTO2.setBalcoons(2);
@@ -115,7 +112,7 @@ public class FlatServiceTest {
 		List<FlatTO> flatTOs = flatService.findAll();
 
 		// then
-		Assert.assertEquals(preAddedFlatTOs.size()+1, flatTOs.size());
+		Assert.assertEquals(preAddedFlatTOs.size() + 1, flatTOs.size());
 	}
 
 	@Test
@@ -134,13 +131,13 @@ public class FlatServiceTest {
 		// then
 		Assert.assertEquals(addedflatTOs.get(0).getFloor(), flatTO.getFloor());
 	}
-	
+
 	@Test
 	public void testShouldGetFlatByBalcons() {
 
 		// given
 		List<FlatTO> flatTOs = flatService.getFlatByBalcoonsFromTO(1, 2);
-		
+
 		FlatTO flatTO = new FlatTO();
 		flatTO.setAddress("A2");
 		flatTO.setBalcoons(1);
@@ -152,7 +149,7 @@ public class FlatServiceTest {
 		flatTO2.setBalcoons(0);
 		flatTO2.setStatus("FREE");
 		flatTO2 = flatService.addFlat(flatTO2);
-		
+
 		FlatTO flatTO3 = new FlatTO();
 		flatTO3.setAddress("A2");
 		flatTO3.setBalcoons(2);
@@ -163,7 +160,7 @@ public class FlatServiceTest {
 		List<FlatTO> addedflatTOs = flatService.getFlatByBalcoonsFromTO(1, 2);
 
 		// then
-		Assert.assertEquals(flatTOs.size()+2, addedflatTOs.size());
+		Assert.assertEquals(flatTOs.size() + 2, addedflatTOs.size());
 	}
 
 	@Test
@@ -598,6 +595,7 @@ public class FlatServiceTest {
 		Assert.assertEquals(flatsPre1.size() + 1, flats1.size());
 		Assert.assertEquals(flatsPre2.size() + 2, flats2.size());
 	}
+
 	@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 	@Test
 	public void testShouldGetFlatVariousCriteriaSizeAndBalcons() {
@@ -663,7 +661,7 @@ public class FlatServiceTest {
 		flatService.addFlatToBuilding(flatTO3.getId(), buildingTO.getId());
 		flatService.addFlatToBuilding(flatTO4.getId(), buildingTO2.getId());
 		flatService.addFlatToBuilding(flatTO5.getId(), buildingTO2.getId());
-		
+
 		FlatSearchCriteriaTO flatSearchCriteriaTO = new FlatSearchCriteriaTO();
 		flatSearchCriteriaTO.setMaxSize(51);
 		flatSearchCriteriaTO.setMaxSize(41);
@@ -673,11 +671,11 @@ public class FlatServiceTest {
 		// when
 
 		List<FlatTO> flats1 = flatService.findFlatByVariousCriteria(flatSearchCriteriaTO);
-		
 
 		// then
 		Assert.assertEquals(2, flats1.size());
 	}
+
 	@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 	@Test
 	public void testShouldGetFlatVariousCriteriaSizeAndRooms() {
@@ -743,7 +741,7 @@ public class FlatServiceTest {
 		flatService.addFlatToBuilding(flatTO3.getId(), buildingTO.getId());
 		flatService.addFlatToBuilding(flatTO4.getId(), buildingTO2.getId());
 		flatService.addFlatToBuilding(flatTO5.getId(), buildingTO2.getId());
-		
+
 		FlatSearchCriteriaTO flatSearchCriteriaTO = new FlatSearchCriteriaTO();
 		flatSearchCriteriaTO.setMaxSize(51);
 		flatSearchCriteriaTO.setMinSize(41);
@@ -753,12 +751,11 @@ public class FlatServiceTest {
 		// when
 
 		List<FlatTO> flats1 = flatService.findFlatByVariousCriteria(flatSearchCriteriaTO);
-		
 
 		// then
 		Assert.assertEquals(2, flats1.size());
 	}
-	
+
 	@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 	@Test
 	public void testShouldGetFlatVariousCriteriaAll() {
@@ -829,7 +826,7 @@ public class FlatServiceTest {
 		flatService.addFlatToBuilding(flatTO3.getId(), buildingTO.getId());
 		flatService.addFlatToBuilding(flatTO4.getId(), buildingTO2.getId());
 		flatService.addFlatToBuilding(flatTO5.getId(), buildingTO2.getId());
-		
+
 		FlatSearchCriteriaTO flatSearchCriteriaTO = new FlatSearchCriteriaTO();
 		flatSearchCriteriaTO.setMaxSize(51);
 		flatSearchCriteriaTO.setMinSize(40);
@@ -837,11 +834,10 @@ public class FlatServiceTest {
 		flatSearchCriteriaTO.setMaxRooms(3);
 		flatSearchCriteriaTO.setMinBalcons(1);
 		flatSearchCriteriaTO.setMaxBalcons(2);
-		
+
 		// when
 
 		List<FlatTO> flats1 = flatService.findFlatByVariousCriteria(flatSearchCriteriaTO);
-		
 
 		// then
 		Assert.assertEquals(4, flats1.size());

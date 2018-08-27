@@ -7,15 +7,11 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import com.capgemini.domain.BuildingEntity;
 import com.capgemini.domain.FlatEntity;
-import com.capgemini.domain.QBuildingEntity;
 import com.capgemini.domain.QFlatEntity;
 import com.capgemini.repository.CustomizedFlatRepository;
 import com.capgemini.types.FlatSearchCriteriaTO;
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.QueryFactory;
-import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @Repository

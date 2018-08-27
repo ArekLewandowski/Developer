@@ -20,14 +20,14 @@ public class ClientTO {
 	private String address;
 	private String phone;
 	private List<Long> ownedId;
-	private List<Long> coownedId;	
+	private List<Long> coownedId;
 	private Long version;
-	
-	public void addOwnedFlatId(Long id){
+
+	public void addOwnedFlatId(Long id) {
 		this.ownedId.add(id);
-	}		
-		
-	public void addCoownedFlatId(Long id){
+	}
+
+	public void addCoownedFlatId(Long id) {
 		this.coownedId.add(id);
 	}
 }

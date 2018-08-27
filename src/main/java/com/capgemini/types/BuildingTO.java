@@ -21,8 +21,8 @@ public class BuildingTO {
 	private int flatsSum;
 	private List<Long> flatsId;
 	private Long version;
-	
-	public void addFlatId(Long id){
+
+	public void addFlatId(Long id) {
 		this.flatsId.add(id);
 	}
 }

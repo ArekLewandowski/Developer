@@ -27,11 +27,11 @@ public class ClientServiceImpl implements ClientService {
 		clientEntity = clientRepository.save(clientEntity);
 		return ClientMapper.map2TO(clientEntity);
 	}
-	
+
 	@Override
 	public ClientTO updateClient(ClientTO clientTO) {
 		ClientEntity currentEntity = clientRepository.findOne(clientTO.getId());
-		if (clientTO.getVersion()!=currentEntity.getVersion()) {
+		if (clientTO.getVersion() != currentEntity.getVersion()) {
 			throw new OptimisticLockException();
 		}
 		ClientEntity clientEntity = ClientMapper.map2Entity(clientTO, currentEntity);

@@ -3,7 +3,10 @@ package com.capgemini.domain;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @MappedSuperclass
 public abstract class AbstractEntity {

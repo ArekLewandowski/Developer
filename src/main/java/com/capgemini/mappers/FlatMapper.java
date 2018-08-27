@@ -10,31 +10,23 @@ import com.capgemini.types.FlatTO;
 
 public class FlatMapper {
 
-	public static FlatTO map2TO(FlatEntity flatEntity){
-		FlatTO flatTO = FlatTO.builder()
-		.id(flatEntity.getId())
-		.address(flatEntity.getAddress())
-		.balcoons(flatEntity.getBalcoons())
-		.price(flatEntity.getPrice())
-		.rooms(flatEntity.getRooms())
-		.status(flatEntity.getStatus())
-		.floor(flatEntity.getFloor())
-		.size(flatEntity.getSize())
-		.version(flatEntity.getVersion())
-		.coownedClientId(new ArrayList<>())
-		.build();
+	public static FlatTO map2TO(FlatEntity flatEntity) {
+		FlatTO flatTO = FlatTO.builder().id(flatEntity.getId()).address(flatEntity.getAddress())
+				.balcoons(flatEntity.getBalcoons()).price(flatEntity.getPrice()).rooms(flatEntity.getRooms())
+				.status(flatEntity.getStatus()).floor(flatEntity.getFloor()).size(flatEntity.getSize())
+				.version(flatEntity.getVersion()).coownedClientId(new ArrayList<>()).build();
 		if (flatEntity.getOwner() != null) {
-			flatTO.setOwnedClientId(flatEntity.getOwner().getId());			
+			flatTO.setOwnedClientId(flatEntity.getOwner().getId());
 		}
 		List<ClientEntity> coowners = flatEntity.getCoowner();
 		if (!coowners.isEmpty()) {
 			for (ClientEntity clientEntity : coowners) {
-				flatTO.addCoownedClientId(clientEntity.getId());			
+				flatTO.addCoownedClientId(clientEntity.getId());
 			}
 		}
 		return flatTO;
 	}
-	
+
 	public static FlatEntity map2Entity(FlatTO flatTO, FlatEntity flatEntity) {
 		flatEntity.setAddress(flatTO.getAddress());
 		flatEntity.setBalcoons(flatTO.getBalcoons());
@@ -46,7 +38,7 @@ public class FlatMapper {
 		flatEntity.setVersion(flatTO.getVersion());
 		return flatEntity;
 	}
-	
+
 	public static FlatEntity map2Entity(FlatEntity flatEntity, FlatTO flatTO, List<ClientEntity> coowners) {
 		flatEntity = map2Entity(flatTO, flatEntity);
 		for (ClientEntity clientEntity : coowners) {
@@ -54,12 +46,12 @@ public class FlatMapper {
 		}
 		return flatEntity;
 	}
-	
+
 	public static FlatEntity map2Entity(FlatTO flatTO) {
 		FlatEntity flatEntity = new FlatEntity();
 		return map2Entity(flatTO, flatEntity);
 	}
-	
+
 	public static List<FlatTO> map2TOs(List<FlatEntity> flatEntities) {
 		List<FlatTO> flatTOs = new LinkedList<>();
 		for (FlatEntity flatEntity : flatEntities) {
@@ -67,7 +59,7 @@ public class FlatMapper {
 		}
 		return flatTOs;
 	}
-	
+
 	public static List<FlatEntity> map2Entities(List<FlatTO> flatTOs) {
 		List<FlatEntity> flatEntities = new LinkedList<>();
 		for (FlatTO flatTO : flatTOs) {

@@ -1,14 +1,12 @@
 package com.capgemini.repository;
 
-import com.capgemini.types.FlatSearchCriteriaTO;
-
 import java.util.List;
 
-import com.capgemini.domain.BuildingEntity;
 import com.capgemini.domain.FlatEntity;
+import com.capgemini.types.FlatSearchCriteriaTO;
 
 public interface CustomizedFlatRepository {
 
-	 List<FlatEntity> findFlatByVariousCriteria(FlatSearchCriteriaTO flatSearchCriteriaTO);
+	List<FlatEntity> findFlatByVariousCriteria(FlatSearchCriteriaTO flatSearchCriteriaTO);
 
 }

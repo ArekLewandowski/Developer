@@ -30,7 +30,7 @@ public class FlatServiceImpl implements FlatService {
 
 	@Autowired
 	private BuildingRepository buildingRepository;
-	
+
 	@Autowired
 	private CustomizedFlatRepository cfRepository;
 
@@ -105,8 +105,8 @@ public class FlatServiceImpl implements FlatService {
 		if (flatEntity == null) {
 			throw new NoSuchElementException();
 		}
-		return FlatMapper.map2TO(flatEntity);			
-		
+		return FlatMapper.map2TO(flatEntity);
+
 	}
 
 	@Override

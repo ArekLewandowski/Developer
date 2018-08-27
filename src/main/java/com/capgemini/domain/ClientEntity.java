@@ -30,8 +30,8 @@ import lombok.Setter;
 @Entity
 @Table(name = "CLIENT")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@EntityListeners({OnCreateListener.class, OnUpdateListener.class})
-public class ClientEntity extends AbstractEntity{
+@EntityListeners({ OnCreateListener.class, OnUpdateListener.class })
+public class ClientEntity extends AbstractEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -53,11 +53,11 @@ public class ClientEntity extends AbstractEntity{
 	@Version
 	private Long version;
 
-	public void addOwned(FlatEntity flatEntity){
+	public void addOwned(FlatEntity flatEntity) {
 		this.owned.add(flatEntity);
 	}
-	
-	public void addCoowned(FlatEntity flatEntity){
+
+	public void addCoowned(FlatEntity flatEntity) {
 		this.coowned.add(flatEntity);
 	}
 }

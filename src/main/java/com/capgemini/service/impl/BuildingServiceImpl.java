@@ -22,22 +22,22 @@ public class BuildingServiceImpl implements BuildingService {
 
 	@Autowired
 	BuildingRepository buildingRepository;
-	
+
 	@Autowired
 	FlatRepository flatRepository;
-	
+
 	@Override
 	public BuildingTO addBuilding(BuildingTO buildingTO) {
 		BuildingEntity bEntity = BuildingMapper.map2Entity(buildingTO);
 		bEntity = buildingRepository.save(bEntity);
 		return BuildingMapper.map2TO(bEntity);
 	}
-	
+
 	@Override
 	public BuildingTO updateBuilding(BuildingTO buildingTO) {
 		BuildingEntity currentEntity = buildingRepository.findOne(buildingTO.getId());
 		if (currentEntity.getVersion() != buildingTO.getVersion()) {
-			throw new OptimisticLockException(); 
+			throw new OptimisticLockException();
 		}
 		BuildingEntity bEntity = BuildingMapper.map2Entity(buildingTO, currentEntity);
 		bEntity = buildingRepository.save(bEntity);
@@ -60,9 +60,9 @@ public class BuildingServiceImpl implements BuildingService {
 		}
 		return buildingTOs;
 	}
-	
+
 	@Override
-	public BuildingTO getBuildingById(Long id){
+	public BuildingTO getBuildingById(Long id) {
 		return BuildingMapper.map2TO(buildingRepository.findOne(id));
 	}
 
@@ -78,7 +78,7 @@ public class BuildingServiceImpl implements BuildingService {
 		}
 		return buildingTOs;
 	}
-	
+
 	@Override
 	public List<BuildingTO> getBuildingByFloors(int floors) {
 		List<BuildingEntity> buildingEntities = buildingRepository.findByFloors(floors);
@@ -103,11 +103,11 @@ public class BuildingServiceImpl implements BuildingService {
 		int sumOfClientFlats = buildingRepository.sumAllBoughtFlatsByClient(clientId);
 		return sumOfClientFlats;
 	}
-	
+
 	@Override
 	public List<Long> mostAvaibleBuilding() {
 		List<Long> numbersOfFlats = flatRepository.getMaxOfFreeFlatsInBuilding();
-		Long max = numbersOfFlats.get(0);
+		long max = numbersOfFlats.get(0);
 		List<Long> buildings = flatRepository.getMostAvelibleBuildings(max);
 		return buildings;
 	}

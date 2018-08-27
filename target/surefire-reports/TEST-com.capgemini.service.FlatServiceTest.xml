@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.capgemini.service.FlatServiceTest" time="0.923" tests="17" errors="0" skipped="0" failures="0">
+<testsuite name="com.capgemini.service.FlatServiceTest" time="1.217" tests="17" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\projects\crash_course\jdk\jdk8\jre\bin"/>
@@ -64,21 +64,21 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testShouldGetFlatRooms" classname="com.capgemini.service.FlatServiceTest" time="0"/>
-  <testcase name="testShouldGetAndIncrementFlatsSum" classname="com.capgemini.service.FlatServiceTest" time="0.053"/>
-  <testcase name="testShouldAddAndGetFlatToBuilding" classname="com.capgemini.service.FlatServiceTest" time="0.079"/>
-  <testcase name="testShouldGetFlatBySize" classname="com.capgemini.service.FlatServiceTest" time="0.048"/>
+  <testcase name="testShouldGetFlatRooms" classname="com.capgemini.service.FlatServiceTest" time="0.062"/>
+  <testcase name="testShouldGetAndIncrementFlatsSum" classname="com.capgemini.service.FlatServiceTest" time="0.063"/>
+  <testcase name="testShouldAddAndGetFlatToBuilding" classname="com.capgemini.service.FlatServiceTest" time="0.047"/>
+  <testcase name="testShouldGetFlatBySize" classname="com.capgemini.service.FlatServiceTest" time="0.078"/>
   <testcase name="testShouldGetFlatByBalcons" classname="com.capgemini.service.FlatServiceTest" time="0"/>
-  <testcase name="testShouldGetFlatByStatus" classname="com.capgemini.service.FlatServiceTest" time="0.051"/>
-  <testcase name="testShouldRemoveAndDecrementFlatsSum" classname="com.capgemini.service.FlatServiceTest" time="0.042"/>
-  <testcase name="testShouldGetFlatVariousCriteriaAll" classname="com.capgemini.service.FlatServiceTest" time="0.243"/>
-  <testcase name="testShouldGetFlatByBuildingAndStatus" classname="com.capgemini.service.FlatServiceTest" time="0.055"/>
-  <testcase name="testShouldGetFlatByFloor" classname="com.capgemini.service.FlatServiceTest" time="0.01"/>
-  <testcase name="testShouldGetFlatVariousCriteriaSizeAndBalcons" classname="com.capgemini.service.FlatServiceTest" time="0.059"/>
-  <testcase name="testShouldGetFlatVariousCriteriaSizeAndRooms" classname="com.capgemini.service.FlatServiceTest" time="0.062"/>
-  <testcase name="testShouldGetFlatByBuilding" classname="com.capgemini.service.FlatServiceTest" time="0.053"/>
-  <testcase name="testShouldShowDisabledApprFlats" classname="com.capgemini.service.FlatServiceTest" time="0.117"/>
+  <testcase name="testShouldGetFlatByStatus" classname="com.capgemini.service.FlatServiceTest" time="0.093"/>
+  <testcase name="testShouldRemoveAndDecrementFlatsSum" classname="com.capgemini.service.FlatServiceTest" time="0.094"/>
+  <testcase name="testShouldGetFlatVariousCriteriaAll" classname="com.capgemini.service.FlatServiceTest" time="0.359"/>
+  <testcase name="testShouldGetFlatByBuildingAndStatus" classname="com.capgemini.service.FlatServiceTest" time="0.063"/>
+  <testcase name="testShouldGetFlatByFloor" classname="com.capgemini.service.FlatServiceTest" time="0.015"/>
+  <testcase name="testShouldGetFlatVariousCriteriaSizeAndBalcons" classname="com.capgemini.service.FlatServiceTest" time="0.063"/>
+  <testcase name="testShouldGetFlatVariousCriteriaSizeAndRooms" classname="com.capgemini.service.FlatServiceTest" time="0.046"/>
+  <testcase name="testShouldGetFlatByBuilding" classname="com.capgemini.service.FlatServiceTest" time="0.046"/>
+  <testcase name="testShouldShowDisabledApprFlats" classname="com.capgemini.service.FlatServiceTest" time="0.094"/>
   <testcase name="testShouldAddAndGetFlat" classname="com.capgemini.service.FlatServiceTest" time="0"/>
-  <testcase name="testShouldRemoveFlats" classname="com.capgemini.service.FlatServiceTest" time="0.02"/>
-  <testcase name="testShouldFindAllFlats" classname="com.capgemini.service.FlatServiceTest" time="0.031"/>
+  <testcase name="testShouldRemoveFlats" classname="com.capgemini.service.FlatServiceTest" time="0.094"/>
+  <testcase name="testShouldFindAllFlats" classname="com.capgemini.service.FlatServiceTest" time="0"/>
 </testsuite>

@@ -37,6 +37,6 @@ public interface FlatService {
 	FlatTO updateFlat(FlatTO flatTO);
 
 	List<FlatTO> findFlatByStatusAndBuilding(String status, Long BuildingId);
-	
+
 	List<FlatTO> findFlatByVariousCriteria(FlatSearchCriteriaTO flatSearchCriteriaTO);
 }
