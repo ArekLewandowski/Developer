@@ -3,6 +3,7 @@ package com.capgemini.domain;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -47,7 +48,7 @@ public class BuildingEntity extends AbstractEntity{
 	private boolean elevator;
 	@Column
 	private int flatsSum;	
-	@OneToMany(mappedBy = "building")
+	@OneToMany(mappedBy = "building", cascade = CascadeType.REMOVE)
 	private List<FlatEntity> flats = new LinkedList<>();
 	@Version
 	private Long version;

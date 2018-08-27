@@ -1,6 +1,7 @@
 package com.capgemini.service.impl;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.persistence.OptimisticLockException;
 import javax.transaction.Transactional;
@@ -10,13 +11,14 @@ import org.springframework.stereotype.Service;
 
 import com.capgemini.domain.BuildingEntity;
 import com.capgemini.domain.FlatEntity;
-import com.capgemini.enums.FlatStatus;
 import com.capgemini.mappers.BuildingMapper;
 import com.capgemini.mappers.FlatMapper;
 import com.capgemini.repository.BuildingRepository;
+import com.capgemini.repository.CustomizedFlatRepository;
 import com.capgemini.repository.FlatRepository;
 import com.capgemini.service.FlatService;
 import com.capgemini.types.BuildingTO;
+import com.capgemini.types.FlatSearchCriteriaTO;
 import com.capgemini.types.FlatTO;
 
 @Service
@@ -28,6 +30,9 @@ public class FlatServiceImpl implements FlatService {
 
 	@Autowired
 	private BuildingRepository buildingRepository;
+	
+	@Autowired
+	private CustomizedFlatRepository cfRepository;
 
 	@Override
 	public FlatTO addFlat(FlatTO flatTO) {
@@ -97,11 +102,15 @@ public class FlatServiceImpl implements FlatService {
 	@Override
 	public FlatTO getFlatById(Long id) {
 		FlatEntity flatEntity = flatRepository.findOne(id);
-		return FlatMapper.map2TO(flatEntity);
+		if (flatEntity == null) {
+			throw new NoSuchElementException();
+		}
+		return FlatMapper.map2TO(flatEntity);			
+		
 	}
 
 	@Override
-	public List<FlatTO> getFlatByStatus(FlatStatus status) {
+	public List<FlatTO> getFlatByStatus(String status) {
 		List<FlatEntity> flatEntities = flatRepository.findByStatus(status);
 		List<FlatTO> flatTOs = FlatMapper.map2TOs(flatEntities);
 		return flatTOs;
@@ -143,10 +152,15 @@ public class FlatServiceImpl implements FlatService {
 	}
 
 	@Override
-	public List<FlatTO> findFlatByStatusAndBuilding(FlatStatus status, Long BuildingId) {
+	public List<FlatTO> findFlatByStatusAndBuilding(String status, Long BuildingId) {
 		List<FlatEntity> flatEntities = flatRepository.findFlatByStatusAndBuilding(status, BuildingId);
 		List<FlatTO> flatTOs = FlatMapper.map2TOs(flatEntities);
 		return flatTOs;
 	}
 
+	@Override
+	public List<FlatTO> findFlatByVariousCriteria(FlatSearchCriteriaTO flatSearchCriteriaTO) {
+		List<FlatEntity> flatEntities = cfRepository.findFlatByVariousCriteria(flatSearchCriteriaTO);
+		return FlatMapper.map2TOs(flatEntities);
+	}
 }

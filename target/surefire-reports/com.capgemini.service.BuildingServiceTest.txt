@@ -1,20 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.capgemini.service.BuildingServiceTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.234 sec <<< FAILURE! - in com.capgemini.service.BuildingServiceTest
-testShouldGetBuildingByLocalization(com.capgemini.service.BuildingServiceTest)  Time elapsed: 0 sec  <<< FAILURE!
-java.lang.AssertionError: expected:<1> but was:<5>
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.Assert.failNotEquals(Assert.java:834)
-	at org.junit.Assert.assertEquals(Assert.java:645)
-	at org.junit.Assert.assertEquals(Assert.java:631)
-	at com.capgemini.service.BuildingServiceTest.testShouldGetBuildingByLocalization(BuildingServiceTest.java:121)
-
-testShouldGetBuildingByFloors(com.capgemini.service.BuildingServiceTest)  Time elapsed: 0 sec  <<< FAILURE!
-java.lang.AssertionError: expected:<2> but was:<6>
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.Assert.failNotEquals(Assert.java:834)
-	at org.junit.Assert.assertEquals(Assert.java:645)
-	at org.junit.Assert.assertEquals(Assert.java:631)
-	at com.capgemini.service.BuildingServiceTest.testShouldGetBuildingByFloors(BuildingServiceTest.java:151)
-
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.573 sec - in com.capgemini.service.BuildingServiceTest

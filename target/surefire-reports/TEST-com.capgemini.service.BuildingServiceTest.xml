@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.capgemini.service.BuildingServiceTest" time="0.162" tests="6" errors="0" skipped="0" failures="2">
+<testsuite name="com.capgemini.service.BuildingServiceTest" time="0.608" tests="9" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\projects\crash_course\jdk\jdk8\jre\bin"/>
@@ -64,34 +64,13 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testShouldGetBuildingByLocalization" classname="com.capgemini.service.BuildingServiceTest" time="0">
-    <failure message="expected:&lt;1&gt; but was:&lt;5&gt;" type="java.lang.AssertionError"><![CDATA[java.lang.AssertionError: expected:<1> but was:<5>
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.Assert.failNotEquals(Assert.java:834)
-	at org.junit.Assert.assertEquals(Assert.java:645)
-	at org.junit.Assert.assertEquals(Assert.java:631)
-	at com.capgemini.service.BuildingServiceTest.testShouldGetBuildingByLocalization(BuildingServiceTest.java:121)
-]]></failure>
-    <system-out><![CDATA[2018-08-27 00:35:54.214  INFO 3020 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.capgemini.service.BuildingServiceTest], using SpringBootContextLoader
-2018-08-27 00:35:54.215  INFO 3020 --- [           main] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [com.capgemini.service.BuildingServiceTest]: no resource found for suffixes {-context.xml, Context.groovy}.
-2018-08-27 00:35:54.216  INFO 3020 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.capgemini.service.BuildingServiceTest]: BuildingServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2018-08-27 00:35:54.229  INFO 3020 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.capgemini.StarterKitJpaStarterApplication for test class com.capgemini.service.BuildingServiceTest
-2018-08-27 00:35:54.235  INFO 3020 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.AutoConfigureReportTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
-2018-08-27 00:35:54.236  INFO 3020 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Could not instantiate TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener]. Specify custom listener classes or make the default listener classes (and their required dependencies) available. Offending class: [javax/servlet/ServletContext]
-2018-08-27 00:35:54.238  INFO 3020 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@41bb1f09, org.springframework.boot.test.autoconfigure.AutoConfigureReportTestExecutionListener@349f0ca4, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@66f2ec1c, org.springframework.test.context.support.DirtiesContextTestExecutionListener@b3fc6d8, org.springframework.test.context.transaction.TransactionalTestExecutionListener@12e5d3e1, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@5ed31735, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@2fb082ff, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@5a4c98d7, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@668a32a4, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@2026fbff]
-]]></system-out>
-  </testcase>
-  <testcase name="testShouldGetBuildingByFloors" classname="com.capgemini.service.BuildingServiceTest" time="0">
-    <failure message="expected:&lt;2&gt; but was:&lt;6&gt;" type="java.lang.AssertionError"><![CDATA[java.lang.AssertionError: expected:<2> but was:<6>
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.Assert.failNotEquals(Assert.java:834)
-	at org.junit.Assert.assertEquals(Assert.java:645)
-	at org.junit.Assert.assertEquals(Assert.java:631)
-	at com.capgemini.service.BuildingServiceTest.testShouldGetBuildingByFloors(BuildingServiceTest.java:151)
-]]></failure>
-  </testcase>
-  <testcase name="testShouldGetAverigePriceOfFlatInBuilding" classname="com.capgemini.service.BuildingServiceTest" time="0"/>
-  <testcase name="testShouldGetSumOfAllFlatsofClient" classname="com.capgemini.service.BuildingServiceTest" time="0.072"/>
-  <testcase name="testShouldAddAndGetBuilding" classname="com.capgemini.service.BuildingServiceTest" time="0.009"/>
-  <testcase name="testShouldFindAllBuildings" classname="com.capgemini.service.BuildingServiceTest" time="0.081"/>
+  <testcase name="testShouldGetBuildingByLocalization" classname="com.capgemini.service.BuildingServiceTest" time="0.155"/>
+  <testcase name="testShouldGetBuildingByFloors" classname="com.capgemini.service.BuildingServiceTest" time="0.021"/>
+  <testcase name="testShouldGetAverigePriceOfFlatInBuilding" classname="com.capgemini.service.BuildingServiceTest" time="0.118"/>
+  <testcase name="testShouldGetSumOfAllFlatsofClient" classname="com.capgemini.service.BuildingServiceTest" time="0.137"/>
+  <testcase name="testShouldRemoveFlatFromBuildingWithBuilding" classname="com.capgemini.service.BuildingServiceTest" time="0.068"/>
+  <testcase name="testShouldAddAndGetBuilding" classname="com.capgemini.service.BuildingServiceTest" time="0.007"/>
+  <testcase name="testShouldFindAllBuildings" classname="com.capgemini.service.BuildingServiceTest" time="0.043"/>
+  <testcase name="testShouldUpdateBuilding" classname="com.capgemini.service.BuildingServiceTest" time="0.012"/>
+  <testcase name="testShouldGetMostAvelibleBuilding" classname="com.capgemini.service.BuildingServiceTest" time="0.047"/>
 </testsuite>

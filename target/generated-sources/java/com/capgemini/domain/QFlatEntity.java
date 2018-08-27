@@ -47,7 +47,7 @@ public class QFlatEntity extends EntityPathBase<FlatEntity> {
 
     public final NumberPath<Integer> size = createNumber("size", Integer.class);
 
-    public final EnumPath<com.capgemini.enums.FlatStatus> status = createEnum("status", com.capgemini.enums.FlatStatus.class);
+    public final StringPath status = createString("status");
 
     //inherited
     public final DateTimePath<java.util.Date> updated = _super.updated;
@@ -59,11 +59,11 @@ public class QFlatEntity extends EntityPathBase<FlatEntity> {
     }
 
     public QFlatEntity(Path<? extends FlatEntity> path) {
-        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
+        this(path.getType(), path.getMetadata(), path.getMetadata().isRoot() ? INITS : PathInits.DEFAULT);
     }
 
     public QFlatEntity(PathMetadata metadata) {
-        this(metadata, PathInits.getFor(metadata, INITS));
+        this(metadata, metadata.isRoot() ? INITS : PathInits.DEFAULT);
     }
 
     public QFlatEntity(PathMetadata metadata, PathInits inits) {

@@ -24,6 +24,6 @@ public interface BuildingService {
 
 	BuildingTO updateBuilding(BuildingTO buildingTO);
 
-	List<BuildingTO> mostAvaibleBuilding();
+	List<Long> mostAvaibleBuilding();
 	
 }

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.capgemini.domain.ClientEntity;
 import com.capgemini.domain.FlatEntity;
-import com.capgemini.enums.FlatStatus;
 import com.capgemini.exceptions.FlatNotAvaibleExcepion;
 import com.capgemini.exceptions.OverReservationLimitException;
 import com.capgemini.mappers.ClientMapper;
@@ -43,7 +42,7 @@ public class ReservationServiceImpl implements ReservationService {
 	public FlatTO reserveFlatWithCoowner(FlatTO flatTO, ClientTO clientTO, List<ClientTO> coowners) {
 		FlatEntity flatEntity = flatRepository.getOne(flatTO.getId());
 		ClientEntity clientEntity = clientRepository.findOne(clientTO.getId());
-		if (!flatEntity.getStatus().equals(FlatStatus.FREE)) {
+		if (!flatEntity.getStatus().equals("FREE")) {
 			throw new FlatNotAvaibleExcepion();
 		}
 		int reservedFlats = 0;
@@ -51,7 +50,7 @@ public class ReservationServiceImpl implements ReservationService {
 		if (!clientEntity.getOwned().isEmpty()) {
 			List<FlatEntity> ownedFlats = clientEntity.getOwned();
 			for (FlatEntity flatEntityOwn : ownedFlats) {
-				if (flatEntityOwn.getStatus().equals(FlatStatus.RESERVED)) {
+				if (flatEntityOwn.getStatus().equals("RESERVED")) {
 					reservedFlats++;
 				}
 			}
@@ -59,14 +58,16 @@ public class ReservationServiceImpl implements ReservationService {
 		if (reservedFlats >= RESERVATION_LIMIT) {
 			throw new OverReservationLimitException();
 		}
-		flatEntity.setStatus(FlatStatus.RESERVED);
+		flatEntity.setStatus("RESERVED");
 		flatEntity.setOwner(clientEntity);
 		clientEntity.addOwned(flatEntity);
 
-		for (ClientTO clientTO2 : coowners) {
-			ClientEntity coownerEntity = clientRepository.findOne(clientTO2.getId());
-			flatEntity.addCoowner(coownerEntity);
-			coownerEntity.addCoowned(flatEntity);
+		if (coowners.size() != 0 || coowners != null) {
+			for (ClientTO clientTO2 : coowners) {
+				ClientEntity coownerEntity = clientRepository.findOne(clientTO2.getId());
+				flatEntity.addCoowner(coownerEntity);
+				coownerEntity.addCoowned(flatEntity);
+			}			
 		}
 		flatTO = FlatMapper.map2TO(flatEntity);
 
@@ -83,13 +84,13 @@ public class ReservationServiceImpl implements ReservationService {
 	public FlatTO buyFlatWithCoowners(FlatTO flatTO, ClientTO clientTO, List<ClientTO> coowners) {
 		FlatEntity flatEntity = flatRepository.getOne(flatTO.getId());
 		ClientEntity clientEntity = clientRepository.findOne(clientTO.getId());
-		if (flatEntity.getStatus().equals(FlatStatus.SOLD)) {
+		if (flatEntity.getStatus().equals("SOLD")) {
 			throw new FlatNotAvaibleExcepion();
-		} else if (flatEntity.getStatus().equals(FlatStatus.RESERVED)
+		} else if (flatEntity.getStatus().equals("RESERVED")
 				&& !(flatEntity.getOwner().getId().equals(clientEntity.getId()))) {
 			throw new FlatNotAvaibleExcepion();
 		} else {
-			flatEntity.setStatus(FlatStatus.SOLD);
+			flatEntity.setStatus("SOLD");
 			flatEntity.setOwner(clientEntity);
 			clientEntity.addOwned(flatEntity);
 		}
@@ -116,13 +117,13 @@ public class ReservationServiceImpl implements ReservationService {
 		}
 		ownerEntity.getOwned().remove(flatEntity);
 		flatEntity.setOwner(null);
-		flatEntity.setStatus(FlatStatus.FREE);
-		return null;
+		flatEntity.setStatus("FREE");
+		return FlatMapper.map2TO(flatEntity);
 	}
 
 	@Override
-	public FlatStatus getFlatStatus(Long flatId) {
-		FlatStatus status = flatRepository.findOne(flatId).getStatus();
+	public String getFlatStatus(Long flatId) {
+		String status = flatRepository.findOne(flatId).getStatus();
 		return status;
 	}
 

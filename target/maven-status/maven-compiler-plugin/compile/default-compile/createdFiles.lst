@@ -27,13 +27,12 @@ com\capgemini\exceptions\OverReservationLimitException.class
 com\capgemini\types\BuildingTO$BuildingTOBuilder.class
 com\capgemini\domain\BuildingEntity$BuildingEntityBuilder.class
 com\capgemini\domain\QFlatEntity.class
+com\capgemini\repositoryImplement\CustomizedFlatRepositoryImpl.class
 com\capgemini\domain\ClientEntity$ClientEntityBuilder.class
 com\capgemini\service\ReservationService.class
 com\capgemini\domain\FlatEntity$FlatEntityBuilder.class
 com\capgemini\service\impl\BuildingServiceImpl.class
 com\capgemini\domain\ClientEntity.class
-com\capgemini\repository\BuildingRepositoryCustom.class
-com\capgemini\enums\FlatStatus.class
 com\capgemini\service\BuildingService.class
 com\capgemini\types\ClientTO.class
 com\capgemini\domain\QBuildingEntity.class

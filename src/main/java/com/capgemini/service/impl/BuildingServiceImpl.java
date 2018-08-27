@@ -105,9 +105,10 @@ public class BuildingServiceImpl implements BuildingService {
 	}
 	
 	@Override
-	public List<BuildingTO> mostAvaibleBuilding() {
-		int max = flatRepository.getMaxOfFreeFlatsInBuilding();
-		List<BuildingEntity> buildingEntities = flatRepository.getMostAvelibleBuildings(max);
-		return BuildingMapper.map2TOs(buildingEntities);
+	public List<Long> mostAvaibleBuilding() {
+		List<Long> numbersOfFlats = flatRepository.getMaxOfFreeFlatsInBuilding();
+		Long max = numbersOfFlats.get(0);
+		List<Long> buildings = flatRepository.getMostAvelibleBuildings(max);
+		return buildings;
 	}
 }

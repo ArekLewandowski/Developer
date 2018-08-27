@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.capgemini.enums.FlatStatus;
 import com.capgemini.types.FlatTO;
 
 @RunWith(SpringRunner.class)
@@ -27,7 +26,7 @@ public class AbstractTest {
 		flatTO.setFloor(0);
 		flatTO.setRooms(2);
 		flatTO.setSize(46);
-		flatTO.setStatus(FlatStatus.FREE);
+		flatTO.setStatus("FREE");
 		flatTO.setPrice(205000);
 		flatTO = flatService.addFlat(flatTO);
 

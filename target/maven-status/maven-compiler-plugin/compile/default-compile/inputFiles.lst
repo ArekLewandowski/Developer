@@ -1,6 +1,5 @@
 C:\projects\crash_course\workspaces\crash_course\Developer\src\main\java\com\capgemini\domain\FlatEntity.java
 C:\projects\crash_course\workspaces\crash_course\Developer\src\main\java\com\capgemini\domain\BuildingEntity.java
-C:\projects\crash_course\workspaces\crash_course\Developer\src\main\java\com\capgemini\enums\FlatStatus.java
 C:\projects\crash_course\workspaces\crash_course\Developer\src\main\java\com\capgemini\exceptions\FlatNotAvaibleExcepion.java
 C:\projects\crash_course\workspaces\crash_course\Developer\src\main\java\com\capgemini\mappers\FlatMapper.java
 C:\projects\crash_course\workspaces\crash_course\Developer\target\generated-sources\java\com\capgemini\domain\QBuildingEntity.java
@@ -31,5 +30,4 @@ C:\projects\crash_course\workspaces\crash_course\Developer\src\main\java\com\cap
 C:\projects\crash_course\workspaces\crash_course\Developer\src\main\java\com\capgemini\repository\CustomizedFlatRepository.java
 C:\projects\crash_course\workspaces\crash_course\Developer\src\main\java\com\capgemini\service\impl\BuildingServiceImpl.java
 C:\projects\crash_course\workspaces\crash_course\Developer\src\main\java\com\capgemini\types\FlatSearchCriteriaTO.java
-C:\projects\crash_course\workspaces\crash_course\Developer\src\main\java\com\capgemini\repository\BuildingRepositoryCustom.java
 C:\projects\crash_course\workspaces\crash_course\Developer\src\main\java\com\capgemini\exceptions\OverReservationLimitException.java

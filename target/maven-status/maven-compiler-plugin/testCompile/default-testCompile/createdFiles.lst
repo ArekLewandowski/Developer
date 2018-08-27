@@ -1,7 +1,5 @@
-com\capgemini\service\ReservationServiceTest.class
-com\capgemini\service\ServiceTestSuite.class
-com\capgemini\AllTests.class
 com\capgemini\service\FlatServiceTest.class
+com\capgemini\service\ReservationServiceTest.class
 com\capgemini\service\AbstractTest.class
 com\capgemini\service\BuildingServiceTest.class
 com\capgemini\service\ClientServiceTest.class

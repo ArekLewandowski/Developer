@@ -11,12 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
-
-import com.capgemini.enums.FlatStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,9 +31,9 @@ import lombok.Setter;
 @Entity
 @Table(name = "FLAT")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@EntityListeners({OnCreateListener.class, OnUpdateListener.class})
-public class FlatEntity extends AbstractEntity{
-	
+@EntityListeners({ OnCreateListener.class, OnUpdateListener.class })
+public class FlatEntity extends AbstractEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -49,23 +48,24 @@ public class FlatEntity extends AbstractEntity{
 	@Column
 	private String address;
 	@Column
-	private FlatStatus status;
+	private String status;
 	@Column
 	private int price;
-	
+
 	@ManyToOne
+	@JoinColumn
 	private BuildingEntity building;
-	
+
 	@ManyToOne
 	private ClientEntity owner;
 
 	@ManyToMany
 	private List<ClientEntity> coowner = new LinkedList<>();
-	
+
 	@Version
 	private Long version;
-	
-	public void addCoowner(ClientEntity cEntity){
+
+	public void addCoowner(ClientEntity cEntity) {
 		this.coowner.add(cEntity);
 	}
 }
